@@ -1,0 +1,600 @@
+<title>Soạn đề KHTN</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg:#f7f8fb; --bg2:#fff; --bg3:#edf0f7; --bg4:#e2e6f0;
+  --fg:#141720; --fg2:#495173; --fg3:#8490ad;
+  --pri:#1d4ed8; --pri2:#1e40af; --pri-bg:#eff6ff; --pri-fg:#fff;
+  --ok:#15803d; --ok-bg:#f0fdf4;
+  --err:#b91c1c; --err-bg:#fef2f2;
+  --warn:#c2410c; --warn-bg:#fff7ed;
+  --bdr:#d5dae8; --sh:0 1px 4px rgba(0,0,0,.06);
+  --r:10px; --rs:6px;
+  font-family:'Be Vietnam Pro',system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0f14; --bg2:#171a24; --bg3:#1f2330; --bg4:#282d3e;
+  --fg:#e4e7f0; --fg2:#9ba4be; --fg3:#636d88;
+  --pri:#60a5fa; --pri2:#93bbfd; --pri-bg:#1a2744; --pri-fg:#0d0f14;
+  --ok:#4ade80; --ok-bg:#052e16;
+  --err:#f87171; --err-bg:#3b0e0e;
+  --warn:#fb923c; --warn-bg:#351407;
+  --bdr:#2a3044; --sh:0 1px 4px rgba(0,0,0,.35);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d0f14; --bg2:#171a24; --bg3:#1f2330; --bg4:#282d3e;
+  --fg:#e4e7f0; --fg2:#9ba4be; --fg3:#636d88;
+  --pri:#60a5fa; --pri2:#93bbfd; --pri-bg:#1a2744; --pri-fg:#0d0f14;
+  --ok:#4ade80; --ok-bg:#052e16;
+  --err:#f87171; --err-bg:#3b0e0e;
+  --warn:#fb923c; --warn-bg:#351407;
+  --bdr:#2a3044; --sh:0 1px 4px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+body{
+  background:var(--bg);color:var(--fg);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0;
+}
+*,*::before,*::after{box-sizing:border-box}
+
+/* Layout */
+.wrap{max-width:1000px;margin:0 auto}
+.hdr{padding:18px 0 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hdr h1{font-size:1.2rem;font-weight:700;margin:0;color:var(--pri);white-space:nowrap}
+.hdr .sub{font-size:.78rem;color:var(--fg3)}
+.cols{display:flex;gap:16px;align-items:flex-start}
+.col-main{flex:1;min-width:0}
+.col-side{width:320px;flex-shrink:0;position:sticky;top:12px}
+@media(max-width:780px){
+  .cols{flex-direction:column} .col-side{width:100%;position:static}
+}
+
+/* Shared */
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;box-shadow:var(--sh)}
+.badge{display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:12px;font-weight:600;white-space:nowrap}
+.badge-nb{background:var(--ok-bg);color:var(--ok)} .badge-th{background:var(--warn-bg);color:var(--warn)} .badge-vd{background:var(--err-bg);color:var(--err)}
+.badge-t{background:var(--pri-bg);color:var(--pri)}
+.btn{padding:7px 16px;font-size:.82rem;font-weight:600;border:none;border-radius:var(--rs);cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;transition:all .12s}
+.btn-p{background:var(--pri);color:var(--pri-fg)} .btn-p:hover{filter:brightness(1.12)}
+.btn-o{background:var(--bg2);color:var(--pri);border:1px solid var(--pri)} .btn-o:hover{background:var(--pri-bg)}
+.btn-d{background:var(--err);color:#fff}
+.btn-s{padding:5px 12px;font-size:.76rem}
+select,input[type=text],input[type=number]{padding:6px 10px;font-size:.82rem;border:1px solid var(--bdr);border-radius:var(--rs);background:var(--bg2);color:var(--fg);font-family:inherit}
+select{max-width:100%}
+
+/* Grade pills */
+.grades{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
+.g-pill{padding:5px 16px;font-size:.82rem;font-weight:600;border:2px solid var(--bdr);background:var(--bg2);color:var(--fg2);border-radius:20px;cursor:pointer;transition:all .12s}
+.g-pill:hover{border-color:var(--pri);color:var(--pri)}
+.g-pill.on{background:var(--pri);color:var(--pri-fg);border-color:var(--pri)}
+
+/* Tabs */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--bdr);margin-bottom:14px}
+.tab{padding:8px 18px;font-size:.84rem;font-weight:500;cursor:pointer;border:none;background:none;color:var(--fg2);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.tab:hover{color:var(--fg)} .tab.on{color:var(--pri);border-bottom-color:var(--pri);font-weight:600}
+
+/* Filters row */
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.frow select{min-width:0;flex:1;max-width:200px}
+.frow input[type=text]{flex:1;min-width:120px}
+@media(max-width:600px){.frow{flex-direction:column}.frow select,.frow input{max-width:100%;width:100%}}
+
+/* Stats strip */
+.stats{display:flex;gap:14px;flex-wrap:wrap;padding:8px 14px;background:var(--bg3);border-radius:var(--rs);margin-bottom:12px;font-size:.78rem;color:var(--fg2)}
+.stats b{color:var(--fg)}
+
+/* Question card */
+.qc{padding:12px 14px}
+.qc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:6px}
+.qc-num{font-weight:700;font-size:.8rem;color:var(--pri);display:flex;align-items:center;gap:6px}
+.qc-tags{display:flex;gap:4px;flex-wrap:wrap}
+.qc-stem{font-size:.86rem;line-height:1.55;margin-bottom:6px}
+.qc-stem b{font-weight:600}
+.qc-opts{list-style:none;padding:0;margin:0}
+.qc-opts li{padding:4px 10px;margin-bottom:3px;border-radius:var(--rs);font-size:.82rem;display:flex;gap:7px;align-items:flex-start}
+.qc-opts li.ans{background:var(--ok-bg);font-weight:500}
+.qc-opts .ltr{font-weight:600;color:var(--fg2);min-width:16px}
+.ds-row{display:flex;gap:8px;align-items:flex-start;padding:4px 10px;font-size:.82rem}
+.ds-row .ds-ans{font-weight:600;min-width:22px;text-align:center}
+.ans-block{margin-top:8px;padding:8px 12px;background:var(--ok-bg);border-radius:var(--rs);font-size:.8rem;line-height:1.5}
+
+/* Checkbox */
+.ck{width:17px;height:17px;accent-color:var(--pri);cursor:pointer;flex-shrink:0;margin-top:1px}
+
+/* Pager */
+.pgr{display:flex;justify-content:center;gap:8px;margin:14px 0;align-items:center}
+.pgr button{padding:5px 14px;font-size:.8rem;border:1px solid var(--bdr);border-radius:var(--rs);background:var(--bg2);color:var(--fg2);cursor:pointer;font-family:inherit}
+.pgr button:hover{border-color:var(--pri);color:var(--pri)}
+.pgr button:disabled{opacity:.35;cursor:default;border-color:var(--bdr);color:var(--fg3)}
+.pgr span{font-size:.78rem;color:var(--fg3)}
+
+/* Side panel - selected */
+.sel-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sel-hdr h3{font-size:.88rem;margin:0;font-weight:600}
+.sel-list{max-height:340px;overflow-y:auto}
+.sel-item{display:flex;align-items:center;gap:6px;padding:5px 8px;border-bottom:1px solid var(--bdr);font-size:.78rem}
+.sel-item:last-child{border-bottom:none}
+.sel-rm{border:none;background:none;color:var(--err);cursor:pointer;font-size:.85rem;padding:2px 4px;line-height:1}
+
+/* Exam config */
+.ecfg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.ecfg label{font-size:.8rem;font-weight:500;display:flex;flex-direction:column;gap:3px}
+@media(max-width:500px){.ecfg{grid-template-columns:1fr}}
+
+/* Exam preview */
+.epr{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r);padding:18px;margin-bottom:14px}
+.epr-head{text-align:center;margin-bottom:14px}
+.epr-head h2{font-size:1rem;margin:0 0 2px;font-weight:700}
+.epr-head p{font-size:.82rem;color:var(--fg2);margin:2px 0}
+.epr-sec{font-weight:700;font-size:.86rem;color:var(--pri);margin:14px 0 6px}
+.epr-q{margin-bottom:8px;font-size:.84rem;line-height:1.5}
+.epr-q b{font-weight:600}
+.epr-o{padding-left:20px;font-size:.82rem}
+.epr-o.ea{color:var(--ok);font-weight:500}
+.epr-ans{margin-top:4px;padding:6px 12px;font-size:.8rem;border-left:3px solid var(--ok);color:var(--ok)}
+
+/* Code tabs */
+.ctabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.ctab{padding:5px 14px;font-size:.8rem;font-weight:600;border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;background:var(--bg2);color:var(--fg2)}
+.ctab:hover{border-color:var(--pri)} .ctab.on{background:var(--pri);color:var(--pri-fg);border-color:var(--pri)}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:9px 22px;border-radius:18px;font-size:.8rem;font-weight:500;z-index:999;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+
+.loading{text-align:center;padding:50px;color:var(--fg2)}
+.spinner{display:inline-block;width:26px;height:26px;border:3px solid var(--bdr);border-top-color:var(--pri);border-radius:50%;animation:sp .65s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+[hidden]{display:none!important}
+</style>
+
+<div class="wrap">
+  <div class="hdr">
+    <h1>📝 Soạn đề KHTN</h1>
+    <span class="sub">Kết nối tri thức — Lớp 6 · 7 · 8 · 9</span>
+  </div>
+  <div class="grades" id="grades"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="app"><div class="loading"><div class="spinner"></div><p style="margin-top:10px;font-size:.85rem">Đang tải ngân hàng câu hỏi...</p></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(async()=>{
+// ===== Data =====
+const [BANK,CUR]=await Promise.all([fetch('bank.json').then(r=>r.json()),fetch('curriculum.json').then(r=>r.json())]);
+let DL=null;
+if(window.claude){try{DL=await claude.use('downloads')}catch(e){}}
+
+// ===== State =====
+const S={
+  grade:'9', tab:'bank', page:0,
+  f:{subject:'',lesson:'',type:'',level:'',search:''},
+  sel:[], // selected question ids
+  codes:[], codeIdx:0,
+  showAns:true
+};
+const PP=20, L='ABCDEF'.split(''), TL={mc:'Trắc nghiệm',ds:'Đúng/Sai',tl:'Tự luận',tt:'Thực tiễn'}, LL={NB:'Nhận biết',TH:'Thông hiểu',VD:'Vận dụng'};
+
+// ===== Utils =====
+const $=id=>document.getElementById(id);
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)};
+const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b};
+const subjects=g=>[...new Set(BANK.filter(q=>String(q.grade)===g).map(q=>q.subject))];
+const lessons=(g,subj)=>{const ls=[];(CUR[g]||[]).forEach(ch=>ch.lessons.forEach(l=>{if(!subj||l.subject===subj)ls.push(l)}));return ls};
+const filt=(g,f)=>BANK.filter(q=>{
+  if(String(q.grade)!==g)return 0;
+  if(f.subject&&q.subject!==f.subject)return 0;
+  if(f.lesson&&q.lesson!==+f.lesson)return 0;
+  if(f.type&&q.type!==f.type)return 0;
+  if(f.level&&q.level!==f.level)return 0;
+  if(f.search&&!q.stem.toLowerCase().includes(f.search.toLowerCase()))return 0;
+  return 1;
+});
+const qById=id=>BANK.find(q=>q.id===id);
+
+// ===== Render framework =====
+function renderGrades(){
+  const el=$('grades');el.innerHTML='';
+  ['6','7','8','9'].forEach(g=>{
+    const b=document.createElement('button');
+    b.className='g-pill'+(S.grade===g?' on':'');
+    b.textContent='Lớp '+g;
+    b.onclick=()=>{S.grade=g;S.page=0;S.f={subject:'',lesson:'',type:'',level:'',search:''};S.sel=[];S.codes=[];render()};
+    el.appendChild(b);
+  });
+}
+
+function renderTabs(){
+  const el=$('tabs');el.innerHTML='';
+  [{id:'bank',lb:'📚 Ngân hàng câu hỏi'},{id:'exam',lb:'🎲 Bốc đề'},{id:'preview',lb:'👁 Xem đề ('+S.sel.length+')'}].forEach(t=>{
+    const b=document.createElement('button');
+    b.className='tab'+(S.tab===t.id?' on':'');
+    b.textContent=t.lb;
+    if(t.id==='preview'&&!S.sel.length){b.style.opacity='.4';b.style.cursor='default';}
+    else b.onclick=()=>{if(t.id==='preview'&&!S.sel.length)return;S.tab=t.id;S.page=0;render()};
+    el.appendChild(b);
+  });
+}
+
+function render(){
+  renderGrades();renderTabs();
+  const app=$('app');
+  if(S.tab==='bank') renderBank(app);
+  else if(S.tab==='exam') renderExam(app);
+  else if(S.tab==='preview') renderPreview(app);
+}
+
+// ===== BANK =====
+function renderBank(el){
+  const qs=filt(S.grade,S.f);
+  const tp=Math.max(1,Math.ceil(qs.length/PP));
+  if(S.page>=tp)S.page=tp-1;
+  const pqs=qs.slice(S.page*PP,(S.page+1)*PP);
+  const subs=subjects(S.grade), lsns=lessons(S.grade,S.f.subject);
+  const tc={mc:0,ds:0,tl:0,tt:0};qs.forEach(q=>tc[q.type]++);
+
+  let h='<div class="cols"><div class="col-main">';
+
+  // Filters
+  h+='<div class="frow">';
+  h+=sel('fSub','Tất cả phân môn',subs.map(s=>[s,s]),S.f.subject);
+  h+=sel('fLes','Tất cả bài',lsns.map(l=>[l.num,l.num+'. '+l.title]),S.f.lesson);
+  h+=sel('fTyp','Tất cả dạng',Object.entries(TL),S.f.type);
+  h+=sel('fLev','Tất cả mức',Object.entries(LL),S.f.level);
+  h+=`<input type=text id=fSrc placeholder="Tìm..." value="${esc(S.f.search)}">`;
+  h+='</div>';
+
+  // Stats
+  h+='<div class="stats">';
+  h+=`<span>Tổng: <b>${qs.length}</b></span>`;
+  Object.entries(TL).forEach(([k,v])=>{if(tc[k])h+=`<span>${v}: <b>${tc[k]}</b></span>`});
+  h+='</div>';
+
+  // Questions
+  pqs.forEach(q=>{
+    const ck=S.sel.includes(q.id);
+    h+=`<div class="card qc">`;
+    h+=`<div class="qc-top"><div class="qc-num"><input type=checkbox class="ck" data-id="${q.id}"${ck?' checked':''}><span>${q.id} · Bài ${q.lesson}</span></div>`;
+    h+=`<div class="qc-tags"><span class="badge badge-t">${TL[q.type]||q.type}</span><span class="badge badge-${q.level.toLowerCase()}">${LL[q.level]||q.level}</span></div></div>`;
+    h+=`<div class="qc-stem">${q.stem}</div>`;
+    h+=qBody(q,true);
+    h+=`</div>`;
+  });
+
+  // Pager
+  if(tp>1){
+    h+='<div class="pgr">';
+    h+=`<button data-p="${S.page-1}"${S.page<1?' disabled':''}>← Trước</button>`;
+    h+=`<span>${S.page+1} / ${tp}</span>`;
+    h+=`<button data-p="${S.page+1}"${S.page>=tp-1?' disabled':''}>Sau →</button>`;
+    h+='</div>';
+  }
+  h+='</div>'; // end col-main
+
+  // Side panel
+  h+='<div class="col-side">';
+  h+=renderSidePanel();
+  h+='</div>';
+
+  h+='</div>'; // end cols
+  el.innerHTML=h;
+  bindBank(el);
+}
+
+function renderSidePanel(){
+  let h='<div class="card" style="position:sticky;top:12px">';
+  h+=`<div class="sel-hdr"><h3>Đã chọn (${S.sel.length})</h3>`;
+  if(S.sel.length) h+=`<button class="btn btn-s btn-o" id="bClear">Xoá hết</button>`;
+  h+='</div>';
+  if(S.sel.length){
+    h+='<div class="sel-list">';
+    S.sel.forEach((id,i)=>{
+      const q=qById(id);
+      if(!q)return;
+      h+=`<div class="sel-item"><span style="color:var(--fg3);min-width:20px">${i+1}.</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${q.stem.replace(/<[^>]*>/g,'').slice(0,50)}</span>`;
+      h+=`<span class="badge badge-t" style="font-size:.6rem">${TL[q.type]}</span>`;
+      h+=`<button class="sel-rm" data-rm="${id}">✕</button></div>`;
+    });
+    h+='</div>';
+    h+=`<div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">`;
+    h+=`<button class="btn btn-p" id="bToPrev">👁 Xem đề</button>`;
+    h+=`<button class="btn btn-o" id="bToExam">🎲 Chuyển sang Bốc đề</button>`;
+    h+=`</div>`;
+  } else {
+    h+=`<p style="font-size:.8rem;color:var(--fg3);text-align:center;margin:16px 0">Tích chọn câu hỏi từ ngân hàng hoặc dùng tab <b>Bốc đề</b> để tạo tự động.</p>`;
+  }
+  h+='</div>';
+  return h;
+}
+
+function bindBank(el){
+  el.querySelector('#fSub')?.addEventListener('change',e=>{S.f.subject=e.target.value;S.f.lesson='';S.page=0;render()});
+  el.querySelector('#fLes')?.addEventListener('change',e=>{S.f.lesson=e.target.value;S.page=0;render()});
+  el.querySelector('#fTyp')?.addEventListener('change',e=>{S.f.type=e.target.value;S.page=0;render()});
+  el.querySelector('#fLev')?.addEventListener('change',e=>{S.f.level=e.target.value;S.page=0;render()});
+  el.querySelector('#fSrc')?.addEventListener('input',e=>{S.f.search=e.target.value;S.page=0;render()});
+  el.querySelectorAll('.ck').forEach(c=>c.addEventListener('change',()=>{
+    const id=c.dataset.id;
+    if(c.checked){if(!S.sel.includes(id))S.sel.push(id)}else S.sel=S.sel.filter(x=>x!==id);
+    render();
+  }));
+  el.querySelectorAll('.pgr button').forEach(b=>b.addEventListener('click',()=>{
+    if(!b.disabled){S.page=+b.dataset.p;render();window.scrollTo(0,0)}
+  }));
+  el.querySelectorAll('.sel-rm').forEach(b=>b.addEventListener('click',()=>{
+    S.sel=S.sel.filter(x=>x!==b.dataset.rm);render();
+  }));
+  el.querySelector('#bClear')?.addEventListener('click',()=>{S.sel=[];render()});
+  el.querySelector('#bToPrev')?.addEventListener('click',()=>{S.codes=[];S.tab='preview';render()});
+  el.querySelector('#bToExam')?.addEventListener('click',()=>{S.tab='exam';render()});
+}
+
+// ===== EXAM (auto generate) =====
+function renderExam(el){
+  let h='';
+  h+=`<div class="card"><h3 style="font-size:.92rem;margin:0 0 12px;font-weight:700">Cấu trúc đề kiểm tra</h3>`;
+  h+='<div class="ecfg">';
+  h+=`<label>Phân môn ${sel('exSub','Tất cả',subjects(S.grade).map(s=>[s,s]),'')}</label>`;
+  h+=`<label>Phạm vi bài ${sel('exLes','Toàn bộ',lessons(S.grade,'').map(l=>[l.num,l.num+'. '+l.title]),'')}</label>`;
+  h+=`<label>TN nhiều lựa chọn<input type=number id=exMC value=12 min=0 max=60></label>`;
+  h+=`<label>Đúng/Sai (4 ý)<input type=number id=exDS value=2 min=0 max=20></label>`;
+  h+=`<label>Tự luận<input type=number id=exTL value=4 min=0 max=30></label>`;
+  h+=`<label>Thực tiễn / Song ngữ<input type=number id=exTT value=2 min=0 max=10></label>`;
+  h+=`<label>Số mã đề<input type=number id=exN value=2 min=1 max=8></label>`;
+  h+=`<label style="justify-content:flex-end"><button class="btn btn-p" id="bGen" style="width:100%">🎲 Bốc đề ngẫu nhiên</button></label>`;
+  h+='</div></div>';
+
+  // Current selection summary
+  if(S.sel.length){
+    h+=`<div class="stats" style="margin-top:4px"><span>Câu đã chọn: <b>${S.sel.length}</b></span>`;
+    const tc={mc:0,ds:0,tl:0,tt:0};S.sel.forEach(id=>{const q=qById(id);if(q)tc[q.type]++});
+    Object.entries(TL).forEach(([k,v])=>{if(tc[k])h+=`<span>${v}: <b>${tc[k]}</b></span>`});
+    h+=`<span style="margin-left:auto"><button class="btn btn-s btn-p" id="bSelPrev">👁 Xem đề</button></span></div>`;
+  }
+
+  el.innerHTML=h;
+
+  el.querySelector('#bGen')?.addEventListener('click',()=>{
+    const sub=el.querySelector('#exSub').value;
+    const les=el.querySelector('#exLes').value;
+    const want={mc:+el.querySelector('#exMC').value,ds:+el.querySelector('#exDS').value,tl:+el.querySelector('#exTL').value,tt:+el.querySelector('#exTT').value};
+    const nCodes=+el.querySelector('#exN').value;
+    const pool=filt(S.grade,{subject:sub,lesson:les||''});
+    const picked=[];
+    function pick(type,n){
+      const av=shuffle(pool.filter(q=>q.type===type&&!picked.includes(q)));
+      const tk=av.slice(0,n);picked.push(...tk);
+      if(tk.length<n)toast(`Chỉ có ${tk.length}/${n} câu ${TL[type]}`);
+      return tk;
+    }
+    const mc=pick('mc',want.mc),ds=pick('ds',want.ds),tl=pick('tl',want.tl),tt=pick('tt',want.tt);
+    const all=[...mc,...ds,...tl,...tt];
+    if(!all.length){toast('Không có câu hỏi phù hợp!');return}
+    S.sel=all.map(q=>q.id);
+    S.codes=[];
+    for(let i=0;i<nCodes;i++) S.codes.push(mkCode(all,101+i));
+    S.codeIdx=0; S.tab='preview'; render();
+  });
+
+  el.querySelector('#bSelPrev')?.addEventListener('click',()=>{S.codes=[];S.tab='preview';render()});
+}
+
+// ===== PREVIEW =====
+function renderPreview(el){
+  if(!S.sel.length){el.innerHTML='<div class="card" style="text-align:center;padding:30px"><p>Chưa chọn câu hỏi nào.</p><button class="btn btn-p" id="bBack">← Quay lại ngân hàng</button></div>';el.querySelector('#bBack').onclick=()=>{S.tab='bank';render()};return}
+
+  // Generate codes if not yet
+  if(!S.codes.length){
+    const qs=S.sel.map(qById).filter(Boolean);
+    S.codes=[mkCode(qs,101)];
+    S.codeIdx=0;
+  }
+
+  let h='';
+  // Action bar
+  h+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center">`;
+  h+=`<button class="btn btn-o btn-s" id="bAddCode">+ Thêm mã đề</button>`;
+  h+=`<label style="font-size:.8rem;display:flex;align-items:center;gap:4px;cursor:pointer"><input type=checkbox id="ckAns"${S.showAns?' checked':''}> Hiện đáp án</label>`;
+  h+=`<span style="flex:1"></span>`;
+  if(DL){
+    h+=`<button class="btn btn-p btn-s" id="bWord">📄 Xuất Word</button>`;
+    h+=`<button class="btn btn-o btn-s" id="bHTML">📑 Xuất HTML</button>`;
+    if(S.codes.length>1) h+=`<button class="btn btn-p btn-s" id="bAll">📥 Tất cả mã đề</button>`;
+  }
+  h+=`<button class="btn btn-o btn-s" id="bBackB">← Ngân hàng</button>`;
+  h+=`</div>`;
+
+  // Code tabs
+  if(S.codes.length>1){
+    h+='<div class="ctabs">';
+    S.codes.forEach((c,i)=>{
+      h+=`<button class="ctab${S.codeIdx===i?' on':''}" data-ci="${i}">Mã ${c.num}</button>`;
+    });
+    h+='</div>';
+  }
+
+  // Preview
+  const code=S.codes[S.codeIdx];
+  h+=renderCodePreview(code,S.showAns);
+
+  el.innerHTML=h;
+
+  // Binds
+  el.querySelectorAll('.ctab').forEach(b=>b.addEventListener('click',()=>{S.codeIdx=+b.dataset.ci;renderPreview(el)}));
+  el.querySelector('#bAddCode')?.addEventListener('click',()=>{
+    const qs=S.sel.map(qById).filter(Boolean);
+    S.codes.push(mkCode(qs,101+S.codes.length));
+    S.codeIdx=S.codes.length-1;
+    renderPreview(el);
+  });
+  el.querySelector('#ckAns')?.addEventListener('change',e=>{S.showAns=e.target.checked;renderPreview(el)});
+  el.querySelector('#bWord')?.addEventListener('click',()=>doExport('word',S.codes[S.codeIdx]));
+  el.querySelector('#bHTML')?.addEventListener('click',()=>doExport('html',S.codes[S.codeIdx]));
+  el.querySelector('#bAll')?.addEventListener('click',()=>doExportAll());
+  el.querySelector('#bBackB')?.addEventListener('click',()=>{S.tab='bank';render()});
+}
+
+function renderCodePreview(code,showAns){
+  let h=`<div class="epr">`;
+  h+=`<div class="epr-head"><p style="font-size:.82rem;margin:0">TRƯỜNG THCS THIÊN LỘC</p>`;
+  h+=`<h2>ĐỀ KIỂM TRA KHOA HỌC TỰ NHIÊN ${S.grade}</h2>`;
+  h+=`<p>Bộ sách: Kết nối tri thức với cuộc sống &nbsp;—&nbsp; <b>Mã đề: ${code.num}</b></p></div>`;
+
+  let n=1;
+  code.secs.forEach(sec=>{
+    h+=`<div class="epr-sec">${sec.title}</div>`;
+    if(sec.type==='mc') h+=`<p style="font-style:italic;font-size:.8rem;color:var(--fg2);margin:0 0 6px">Chọn phương án đúng nhất:</p>`;
+    if(sec.type==='ds') h+=`<p style="font-style:italic;font-size:.8rem;color:var(--fg2);margin:0 0 6px">Mỗi câu có 4 ý. Xác định Đúng hay Sai:</p>`;
+    sec.qs.forEach(q=>{
+      h+=`<div class="epr-q"><b>Câu ${n}.</b> ${q.stem}</div>`;
+      if(q.type==='mc'&&q.options){
+        q.options.forEach((o,j)=>{
+          const ea=showAns&&j===q.answer;
+          h+=`<div class="epr-o${ea?' ea':''}">${L[j]}. ${o}${ea?' ✓':''}</div>`;
+        });
+      }
+      if(q.type==='ds'&&q.items){
+        q.items.forEach((it,j)=>{
+          h+=`<div class="epr-o">${String.fromCharCode(97+j)}) ${it.text}`;
+          if(showAns) h+=` → <b style="color:${it.answer==='Đ'?'var(--ok)':'var(--err)'}">${it.answer}</b>`;
+          h+=`</div>`;
+        });
+      }
+      if((q.type==='tl'||q.type==='tt')&&showAns&&q.answer){
+        h+=`<div class="epr-ans">${q.answer}</div>`;
+      }
+      n++;
+    });
+  });
+  h+=`</div>`;
+  return h;
+}
+
+// ===== Generate code =====
+function mkCode(qs,num){
+  const code={num,secs:[]};
+  const mc=qs.filter(q=>q.type==='mc'), ds=qs.filter(q=>q.type==='ds');
+  const tl=qs.filter(q=>q.type==='tl'), tt=qs.filter(q=>q.type==='tt');
+  const shufMC=shuffle(mc).map(q=>{
+    const pairs=q.options.map((o,i)=>({t:o,i}));
+    const sp=shuffle(pairs);
+    return{...q,options:sp.map(p=>p.t),answer:sp.findIndex(p=>p.i===q.answer)};
+  });
+  if(shufMC.length) code.secs.push({title:'I. TRẮC NGHIỆM NHIỀU LỰA CHỌN',type:'mc',qs:shufMC});
+  if(ds.length) code.secs.push({title:'II. TRẮC NGHIỆM ĐÚNG/SAI',type:'ds',qs:shuffle(ds)});
+  if(tl.length) code.secs.push({title:'III. TỰ LUẬN',type:'tl',qs:shuffle(tl)});
+  if(tt.length) code.secs.push({title:'IV. VẬN DỤNG THỰC TIỄN',type:'tt',qs:shuffle(tt)});
+  return code;
+}
+
+// ===== Export =====
+function examHTML(code,withAns){
+  let h=`<div style="font-family:'Times New Roman',serif;font-size:12pt;max-width:700px;margin:0 auto;color:#000;background:#fff;padding:24px">`;
+  h+=`<div style="text-align:center;margin-bottom:4px"><b>TRƯỜNG THCS THIÊN LỘC</b></div>`;
+  h+=`<div style="text-align:center;margin-bottom:4px"><b>ĐỀ KIỂM TRA KHOA HỌC TỰ NHIÊN — LỚP ${S.grade}</b></div>`;
+  h+=`<div style="text-align:center;margin-bottom:4px">Bộ sách: Kết nối tri thức với cuộc sống</div>`;
+  h+=`<div style="text-align:center;margin-bottom:14px"><b>Mã đề: ${code.num}</b></div>`;
+  h+=`<table style="width:100%;margin-bottom:14px;font-size:12pt"><tr><td>Họ tên: ........................................</td><td style="width:120px">Lớp: .........</td></tr></table>`;
+  let n=1;
+  code.secs.forEach(sec=>{
+    h+=`<div style="font-weight:700;margin:12px 0 6px;font-size:12pt">${sec.title}</div>`;
+    if(sec.type==='mc') h+=`<div style="font-style:italic;font-size:11pt;margin-bottom:6px">Chọn phương án đúng nhất cho mỗi câu sau:</div>`;
+    if(sec.type==='ds') h+=`<div style="font-style:italic;font-size:11pt;margin-bottom:6px">Mỗi câu có 4 ý. Hãy xác định mỗi ý Đúng hay Sai:</div>`;
+    sec.qs.forEach(q=>{
+      h+=`<div style="margin-bottom:8px"><div><b>Câu ${n}.</b> ${q.stem}</div>`;
+      if(q.type==='mc'&&q.options) q.options.forEach((o,j)=>{h+=`<div style="padding-left:20px">${L[j]}. ${o}</div>`});
+      if(q.type==='ds'&&q.items) q.items.forEach((it,j)=>{h+=`<div style="padding-left:20px">${String.fromCharCode(97+j)}) ${it.text}</div>`});
+      if(q.type==='tl'||q.type==='tt') h+=`<div style="height:50px;border-bottom:1px dotted #999;margin:6px 0"></div>`;
+      h+=`</div>`;n++;
+    });
+  });
+  if(withAns){
+    h+=`<div style="page-break-before:always"></div>`;
+    h+=`<div style="text-align:center;font-weight:700;margin:18px 0 10px;font-size:14pt">ĐÁP ÁN — Mã đề ${code.num}</div>`;
+
+    // MC answer table
+    const mcSec=code.secs.find(s=>s.type==='mc');
+    if(mcSec&&mcSec.qs.length){
+      let off=1;
+      h+=`<table border=1 style="border-collapse:collapse;margin:0 auto 12px;font-size:11pt"><tr style="background:#eee"><th style="padding:4px 10px">Câu</th>`;
+      mcSec.qs.forEach((_,i)=>{h+=`<th style="padding:4px 8px">${off+i}</th>`});
+      h+=`</tr><tr><th style="padding:4px 10px">ĐA</th>`;
+      mcSec.qs.forEach(q=>{h+=`<td style="padding:4px 8px;text-align:center;font-weight:700">${L[q.answer]}</td>`});
+      h+=`</tr></table>`;
+      off+=mcSec.qs.length;
+
+      // DS, TL, TT answers
+      let an=off;
+      code.secs.filter(s=>s.type!=='mc').forEach(sec=>{
+        h+=`<div style="font-weight:700;margin:8px 0 4px">${sec.title}</div>`;
+        sec.qs.forEach(q=>{
+          h+=`<div style="margin-bottom:4px"><b>Câu ${an}:</b> `;
+          if(q.type==='ds'&&q.items) h+=q.items.map((it,j)=>`${String.fromCharCode(97+j)}) ${it.answer}`).join('. ');
+          else h+=q.answer||'';
+          h+=`</div>`;an++;
+        });
+      });
+    }
+  }
+  h+=`</div>`;
+  return h;
+}
+
+async function doExport(fmt,code){
+  if(!DL){toast('Không hỗ trợ tải xuống');return}
+  const body=examHTML(code,true);
+  if(fmt==='word'){
+    const doc=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:'Times New Roman',serif;font-size:12pt}table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 8px}</style></head><body>${body}</body></html>`;
+    try{await DL.save({filename:`De_KHTN${S.grade}_Ma${code.num}.doc`,data:doc});toast('Đã tải đề Word!')}catch(e){if(e.code!=='declined')toast('Lỗi: '+e.message)}
+  } else {
+    const htm=`<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:serif;font-size:12pt;margin:24px;color:#000;background:#fff}table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 8px}@page{margin:20mm}@media print{body{margin:0}}</style></head><body>${body}</body></html>`;
+    try{await DL.save({filename:`De_KHTN${S.grade}_Ma${code.num}.html`,data:htm});toast('Đã tải đề HTML — mở file rồi in PDF!')}catch(e){if(e.code!=='declined')toast('Lỗi: '+e.message)}
+  }
+}
+
+async function doExportAll(){
+  if(!DL){toast('Không hỗ trợ tải xuống');return}
+  let all=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:'Times New Roman',serif;font-size:12pt}table{border-collapse:collapse}td,th{border:1px solid #000;padding:4px 8px}</style></head><body>`;
+  S.codes.forEach((c,i)=>{if(i)all+=`<div style="page-break-before:always"></div>`;all+=examHTML(c,true)});
+  all+=`</body></html>`;
+  try{await DL.save({filename:`De_KHTN${S.grade}_${S.codes.length}made.doc`,data:all});toast('Đã tải tất cả mã đề!')}catch(e){if(e.code!=='declined')toast('Lỗi: '+e.message)}
+}
+
+// ===== Shared HTML helpers =====
+function qBody(q,showAns){
+  let h='';
+  if(q.type==='mc'&&q.options){
+    h+='<ul class="qc-opts">';
+    q.options.forEach((o,j)=>{h+=`<li${j===q.answer&&showAns?' class="ans"':''}><span class="ltr">${L[j]}.</span>${o}</li>`});
+    h+='</ul>';
+  }
+  if(q.type==='ds'&&q.items){
+    q.items.forEach((it,j)=>{
+      h+=`<div class="ds-row"><span style="color:var(--fg3)">${String.fromCharCode(97+j)})</span><span style="flex:1">${it.text}</span>`;
+      if(showAns) h+=`<span class="ds-ans" style="color:${it.answer==='Đ'?'var(--ok)':'var(--err)'}">${it.answer}</span>`;
+      h+=`</div>`;
+    });
+  }
+  if((q.type==='tl'||q.type==='tt')&&q.answer&&showAns){
+    h+=`<div class="ans-block"><b>Đáp án:</b> ${q.answer}</div>`;
+  }
+  return h;
+}
+
+function sel(id,ph,opts,val){
+  let h=`<select id="${id}"><option value="">${ph}</option>`;
+  opts.forEach(([v,lb])=>{h+=`<option value="${v}"${String(val)===String(v)?' selected':''}>${lb}</option>`});
+  return h+'</select>';
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+
+// ===== Go =====
+render();
+})();
+</script>

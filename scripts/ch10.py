@@ -1,0 +1,128 @@
+from common import moon_svg
+
+def planets_svg():
+    P = [('Thủy', 5, '#a8a29e'), ('Kim', 8, '#facc15'), ('Trái Đất', 8.5, '#3b82f6'), ('Hỏa', 6, '#ef4444'),
+         ('Mộc', 22, '#f59e0b'), ('Thổ', 18, '#eab308'), ('Thiên Vương', 12, '#22d3ee'), ('Hải Vương', 12, '#2563eb')]
+    xs = [95, 135, 178, 220, 285, 365, 440, 510]
+    out = '<circle cx="-30" cy="55" r="85" fill="#fbbf24"/><text x="10" y="60" font-size="11" font-weight="800" fill="#7c2d12">Mặt Trời</text>'
+    for (n, r, c), x in zip(P, xs):
+        out += f'<circle cx="{x}" cy="50" r="{r}" fill="{c}"/>'
+        if n == 'Thổ':
+            out += f'<ellipse cx="{x}" cy="50" rx="{r+12}" ry="5" fill="none" stroke="#a16207" stroke-width="2.5"/>'
+        out += f'<text x="{x}" y="96" font-size="10" text-anchor="middle" fill="#e2e8f0">{n}</text>'
+    out += '<line x1="285" y1="8" x2="285" y2="8"/><text x="555" y="16" font-size="9" text-anchor="end" fill="#94a3b8">(kích thước, khoảng cách không theo tỉ lệ)</text>'
+    out += '<line x1="248" y1="22" x2="248" y2="80" stroke="#64748b" stroke-dasharray="3 3"/><text x="160" y="16" font-size="9" fill="#cbd5e1">4 hành tinh vòng trong</text><text x="300" y="16" font-size="9" fill="#cbd5e1">4 hành tinh vòng ngoài</text>'
+    return f'<svg viewBox="0 0 560 104" width="100%" height="104" font-family="Inter"><rect width="560" height="104" rx="10" fill="#0f172a"/>{out}</svg>'
+
+L52 = dict(num=52, title='Chuyển động nhìn thấy của Mặt Trời. Thiên thể', en='The Apparent Motion of the Sun. Celestial Bodies', icon='☀️',
+ root='MẶT TRỜI & THIÊN THỂ',
+ br=[('Thiên thể', ['Là <b>vật thể tự nhiên</b> tồn tại trong không gian vũ trụ.', 'VD: Mặt Trời, Mặt Trăng, các hành tinh, ngôi sao, sao chổi, tiểu hành tinh…', 'Vệ tinh nhân tạo, máy bay <b>không phải</b> thiên thể.']),
+     ('Chuyển động nhìn thấy', ['Hằng ngày, Mặt Trời <b>mọc ở phía Đông</b>, lên cao dần, rồi <b>lặn ở phía Tây</b>.', 'Đây là chuyển động <b>"nhìn thấy"</b>, không phải chuyển động thật của Mặt Trời quanh Trái Đất.']),
+     ('Giải thích', ['Trái Đất <b>tự quay quanh trục</b> theo chiều <b>từ Tây sang Đông</b>, mỗi vòng khoảng <b>24 giờ</b>.', 'Vì vậy ta thấy Mặt Trời chuyển động ngược lại, từ Đông sang Tây.',
+                     'Trái Đất tự quay nên có <b>ngày và đêm</b>.'])],
+ mc=[('Mặt Trời mọc ở phía', ['Tây.', '*Đông.', 'Nam.', 'Bắc.']),
+     ('Vật nào sau đây là thiên thể?', ['Máy bay.', 'Vệ tinh nhân tạo.', 'Đám mây.', '*Mặt Trăng.']),
+     ('Trái Đất tự quay quanh trục một vòng hết khoảng', ['*24 giờ.', '12 giờ.', '365 ngày.', '30 ngày.']),
+     ('Ta thấy Mặt Trời "chuyển động" từ Đông sang Tây vì', ['Mặt Trời quay quanh Trái Đất từ Đông sang Tây.', 'Mặt Trời tự quay quanh trục.', '*Trái Đất tự quay quanh trục theo chiều từ Tây sang Đông.', 'gió thổi Mặt Trời đi.']),
+     ('Hiện tượng ngày và đêm xảy ra là do', ['Mặt Trời tắt sáng vào ban đêm.', '*Trái Đất tự quay quanh trục.', 'Mặt Trăng che khuất Mặt Trời.', 'mây che Mặt Trời.']),
+     ('Buổi sáng, em đứng quay mặt về phía Mặt Trời mọc. Sau lưng em là hướng', ['Đông.', 'Nam.', 'Bắc.', '*Tây.']),
+     ('Buổi chiều, bóng của cây in trên mặt đất hướng về phía', ['*Đông.', 'Tây.', 'Nam.', 'không có bóng.']),
+     ('Lúc 12 giờ trưa ở Hà Nội thì ở Luân Đôn (Anh) – nằm xa về phía Tây – trời đang', ['buổi tối.', '*sáng sớm (khoảng 5 – 6 giờ sáng).', 'giữa trưa.', 'nửa đêm.'])],
+ mc_note='Câu 8: Trái Đất quay từ Tây sang Đông nên nơi ở phía Đông (Hà Nội) thấy Mặt Trời mọc trước; Luân Đôn chậm hơn Hà Nội 6 – 7 giờ tùy mùa.',
+ ds=('Về chuyển động nhìn thấy của Mặt Trời:', [('Mặt Trời thực sự chuyển động quanh Trái Đất mỗi ngày một vòng.', 'S'), ('Sao chổi là một thiên thể.', 'Đ'),
+                                              ('Do Trái Đất quay từ Tây sang Đông nên nơi ở phía Đông thấy Mặt Trời mọc sớm hơn.', 'Đ'), ('Vệ tinh nhân tạo do con người phóng lên là thiên thể.', 'S')]),
+ tl=[dict(lvl='cb', q='Mô tả đường đi "nhìn thấy" của Mặt Trời trên bầu trời từ sáng đến chiều. Giải thích vì sao có hiện tượng đó và vì sao có ngày, đêm.', lines=4,
+          a='Sáng: Mặt Trời mọc ở phía Đông, lên cao dần, trưa ở cao nhất, chiều lặn ở phía Tây. Do Trái Đất tự quay quanh trục từ Tây sang Đông nên ta thấy Mặt Trời chuyển động ngược lại. Trái Đất có dạng cầu, tự quay nên nửa hướng về Mặt Trời là ngày, nửa kia là đêm.'),
+     dict(lvl='nc', q='<b>Đồng hồ Mặt Trời:</b> Cắm một que thẳng đứng giữa sân trường, đánh dấu đầu bóng que lúc 8 giờ, 10 giờ, 12 giờ, 14 giờ và 16 giờ.',
+          sub=['a) Lúc nào bóng que dài nhất, ngắn nhất?', 'b) Buổi sáng bóng que nằm về phía nào? Buổi chiều nằm về phía nào?', 'c) Giải thích kết quả.'], lines=3,
+          a='a) Dài nhất lúc 8 giờ và 16 giờ (Mặt Trời thấp); ngắn nhất khoảng giữa trưa (Mặt Trời cao nhất). b) Sáng: bóng về phía Tây; chiều: bóng về phía Đông. c) Bóng luôn ngược phía với Mặt Trời; Mặt Trời "di chuyển" từ Đông sang Tây do Trái Đất tự quay.')],
+ tt=[dict(t='⚽ Xem bóng đá World Cup.', q='World Cup 2026 tổ chức tại Mỹ, Canada và Mexico (nằm xa về phía Tây so với Việt Nam). Vì sao nhiều trận đấu diễn ra vào buổi chiều, buổi tối ở đó lại được phát sóng vào sáng sớm ở Việt Nam?', lines=2,
+          a='Trái Đất quay từ Tây sang Đông nên Việt Nam (ở phía Đông) "đi trước" về thời gian: khi ở Bắc Mỹ là chiều tối thì ở Việt Nam đã là sáng sớm hôm sau.')],
+ fact='Ánh sáng từ Mặt Trời cần khoảng 8 phút 20 giây để đến Trái Đất. Vì vậy, Mặt Trời mà em nhìn thấy là Mặt Trời của hơn 8 phút trước!',
+ job='nhà thiên văn học, kĩ sư vệ tinh, chuyên viên khí tượng.')
+
+L53 = dict(num=53, title='Mặt Trăng', en='The Moon', icon='🌙',
+ root='MẶT TRĂNG',
+ br=[('Đặc điểm', ['Là <b>vệ tinh tự nhiên</b> của Trái Đất, chuyển động quanh Trái Đất.', '<b>Không tự phát sáng</b>; ta thấy Mặt Trăng sáng là do nó <b>phản chiếu ánh sáng Mặt Trời</b>.',
+                   'Lúc nào cũng có <b>một nửa</b> Mặt Trăng được Mặt Trời chiếu sáng.']),
+     ('Các pha Mặt Trăng', ['Trăng mới (không trăng) → lưỡi liềm đầu tháng → <b>thượng huyền</b> → khuyết đầu tháng →', '<b>trăng tròn</b> → khuyết cuối tháng → <b>hạ huyền</b> → lưỡi liềm cuối tháng.']),
+     ('Vì sao có các pha?', ['Mặt Trăng chuyển động quanh Trái Đất nên <b>phần được chiếu sáng</b> mà ta nhìn thấy thay đổi.', 'Chu kì khoảng <b>29,5 ngày</b> (một tháng âm lịch).', 'Trăng tròn vào khoảng ngày <b>15 – 16 âm lịch</b>.'])],
+ fig=moon_svg() + '<div class="cap">Các pha Mặt Trăng trong một tháng âm lịch (nhìn từ Việt Nam) – dùng cho Bài 1 phần Tự luận</div>',
+ mc=[('Mặt Trăng là', ['một hành tinh.', 'một ngôi sao.', '*vệ tinh tự nhiên của Trái Đất.', 'một sao chổi.']),
+     ('Ta nhìn thấy Mặt Trăng sáng là do Mặt Trăng', ['*phản chiếu ánh sáng Mặt Trời.', 'tự phát ra ánh sáng.', 'được đèn chiếu sáng.', 'nóng đỏ lên.']),
+     ('Trăng tròn thường xuất hiện vào khoảng ngày âm lịch', ['1 – 2.', '7 – 8.', '22 – 23.', '*15 – 16.']),
+     ('Chu kì các pha Mặt Trăng kéo dài khoảng', ['7 ngày.', '*29,5 ngày.', '365 ngày.', '24 giờ.']),
+     ('Ta thấy hình dạng Mặt Trăng thay đổi trong tháng vì', ['Mặt Trăng tự to lên, nhỏ đi.', 'mây che bớt Mặt Trăng.', '*Mặt Trăng chuyển động quanh Trái Đất nên phần được chiếu sáng mà ta nhìn thấy thay đổi.', 'bóng Trái Đất che Mặt Trăng mỗi ngày.']),
+     ('Vào ngày mùng 1 âm lịch, ta hầu như không nhìn thấy Mặt Trăng vì', ['*nửa được chiếu sáng của Mặt Trăng quay về phía Mặt Trời, nửa tối quay về phía Trái Đất.', 'Mặt Trăng tắt sáng.', 'Mặt Trăng ở quá xa.', 'mây che kín bầu trời.']),
+     ('Vào đêm Tết Trung thu (rằm tháng Tám âm lịch), Mặt Trăng có hình dạng', ['lưỡi liềm.', 'thượng huyền.', 'hạ huyền.', '*tròn.']),
+     ('Hôm nay là ngày 8 âm lịch, em thấy trăng thượng huyền. Khoảng bao nhiêu ngày nữa sẽ có trăng tròn?', ['15 ngày.', '*7 ngày.', '22 ngày.', '1 ngày.'])],
+ ds=('Về Mặt Trăng:', [('Mặt Trăng tự phát ra ánh sáng giống như Mặt Trời.', 'S'), ('Lúc nào Mặt Trăng cũng có một nửa được Mặt Trời chiếu sáng.', 'Đ'),
+                      ('Trăng hạ huyền thường thấy vào khoảng ngày 22 – 23 âm lịch.', 'Đ'), ('Hình dạng Mặt Trăng thay đổi hằng ngày là do bóng Trái Đất che lên Mặt Trăng.', 'S')]),
+ tl=[dict(lvl='cb', q='Quan sát hình các pha Mặt Trăng (đánh số 1 – 8). Ghi tên từng pha và cho biết pha nào ứng với ngày rằm (15 âm lịch).',
+          html='<table class="t"><tr>' + ''.join(f'<th>{i}</th>' for i in range(1, 9)) + '</tr><tr>' + '<td class="e"></td>' * 8 + '</tr></table>', lines=1,
+          a='1: trăng mới (không trăng); 2: lưỡi liềm đầu tháng; 3: thượng huyền; 4: khuyết đầu tháng; 5: trăng tròn (ngày rằm); 6: khuyết cuối tháng; 7: hạ huyền; 8: lưỡi liềm cuối tháng.'),
+     dict(lvl='nc', q='Khoảng cách trung bình từ Trái Đất đến Mặt Trăng là khoảng 384 000 km. Tốc độ ánh sáng khoảng 300 000 km/s.',
+          sub=['a) Ánh sáng phản chiếu từ Mặt Trăng đến Trái Đất mất khoảng bao nhiêu giây?', 'b) Giả sử một tàu vũ trụ bay thẳng tới Mặt Trăng với tốc độ trung bình 5000 km/h. Tàu mất khoảng bao nhiêu giờ, tức là khoảng bao nhiêu ngày?'], lines=3,
+          a='a) 384 000 : 300 000 = 1,28 s. b) 384 000 : 5000 = 76,8 giờ ≈ 3,2 ngày (thực tế các tàu Apollo mất khoảng 3 ngày).')],
+ tt=[dict(t='🌾 Lịch âm và đời sống.', q='Ông bà, người nông dân, ngư dân thường dựa vào lịch âm (theo các pha Mặt Trăng) để làm những việc gì? Em hãy quan sát và vẽ hình dạng Mặt Trăng tối nay.', lines=2,
+          a='Theo dõi con nước, thủy triều để đánh bắt cá; tính thời vụ gieo trồng; các ngày lễ, Tết truyền thống (Tết Nguyên đán, Trung thu, rằm, mùng 1)…')],
+ fact='Mặt Trăng luôn quay một mặt về phía Trái Đất, nên từ Trái Đất ta không bao giờ nhìn thấy "mặt sau" của nó. Năm 1969, Neil Armstrong (Mỹ) là người đầu tiên đặt chân lên Mặt Trăng.',
+ job='nhà thiên văn học, kĩ sư hàng không – vũ trụ, nhà hải dương học.')
+
+L54 = dict(num=54, title='Hệ Mặt Trời', en='The Solar System', icon='🪐',
+ root='HỆ MẶT TRỜI',
+ br=[('Thành phần', ['<b>Mặt Trời</b> ở trung tâm – là một <b>ngôi sao</b>, tự phát sáng.', '<b>8 hành tinh</b> chuyển động quanh Mặt Trời.', 'Ngoài ra còn có vệ tinh, tiểu hành tinh, sao chổi…']),
+     ('8 hành tinh (gần → xa)', ['<b>Thủy – Kim – Trái Đất – Hỏa</b>: vòng trong, nhỏ, cấu tạo chủ yếu bằng đá.', '<b>Mộc – Thổ – Thiên Vương – Hải Vương</b>: vòng ngoài, rất lớn, cấu tạo chủ yếu bằng khí và băng.',
+                                 'Trái Đất là hành tinh thứ <b>3</b>; Sao Mộc <b>lớn nhất</b>.']),
+     ('Đơn vị thiên văn (AU)', ['<span class="f">1 AU ≈ 150 triệu km</span> = khoảng cách trung bình từ Trái Đất đến Mặt Trời.', 'Hành tinh càng xa Mặt Trời thì quay hết một vòng quanh Mặt Trời <b>càng lâu</b>.'])],
+ fig=planets_svg(),
+ mc=[('Hệ Mặt Trời có bao nhiêu hành tinh?', ['9.', '*8.', '7.', '10.']),
+     ('Hành tinh gần Mặt Trời nhất là', ['Sao Kim.', 'Trái Đất.', 'Sao Hỏa.', '*Sao Thủy.']),
+     ('Thiên thể ở trung tâm của Hệ Mặt Trời là', ['*Mặt Trời.', 'Trái Đất.', 'Mặt Trăng.', 'Sao Mộc.']),
+     ('Tính từ Mặt Trời ra, Trái Đất là hành tinh thứ', ['nhất.', 'hai.', '*ba.', 'tư.']),
+     ('Hành tinh lớn nhất trong Hệ Mặt Trời là', ['Sao Thổ.', '*Sao Mộc.', 'Trái Đất.', 'Sao Hải Vương.']),
+     ('Hành tinh có hệ vành đai dễ quan sát nhất là', ['Sao Hỏa.', 'Sao Kim.', 'Sao Thủy.', '*Sao Thổ.']),
+     ('Sao Mộc cách Mặt Trời khoảng 5,2 AU. Biết 1 AU ≈ 150 triệu km, khoảng cách đó bằng khoảng', ['5,2 triệu km.', '150 triệu km.', '*780 triệu km.', '7800 triệu km.']),
+     ('Nhận định nào đúng về các hành tinh trong Hệ Mặt Trời?', ['*Hành tinh càng xa Mặt Trời thì quay hết một vòng quanh Mặt Trời càng lâu.', 'Hành tinh càng xa Mặt Trời thì càng nóng.', 'Các hành tinh đều tự phát sáng.', 'Mặt Trăng là một hành tinh.'])],
+ ds=('Về Hệ Mặt Trời:', [('Mặt Trời là một ngôi sao.', 'Đ'), ('Mặt Trăng là một hành tinh trong Hệ Mặt Trời.', 'S'),
+                        ('Sao Kim là hành tinh gần Mặt Trời nhất.', 'S'), ('Bốn hành tinh vòng ngoài có kích thước lớn hơn bốn hành tinh vòng trong.', 'Đ')]),
+ tl=[dict(lvl='cb', q='Sắp xếp các hành tinh theo thứ tự từ gần đến xa Mặt Trời: Sao Hỏa, Sao Thổ, Trái Đất, Sao Thủy, Sao Hải Vương, Sao Kim, Sao Mộc, Sao Thiên Vương. Cho biết hành tinh nào thuộc vòng trong, vòng ngoài.', lines=3,
+          a='Thủy → Kim → Trái Đất → Hỏa (vòng trong) → Mộc → Thổ → Thiên Vương → Hải Vương (vòng ngoài).'),
+     dict(lvl='nc', q='Cho khoảng cách trung bình từ các hành tinh đến Mặt Trời (AU): Thủy 0,39; Kim 0,72; Trái Đất 1; Hỏa 1,52; Mộc 5,2; Thổ 9,5; Thiên Vương 19,2; Hải Vương 30,1. Biết 1 AU ≈ 150 triệu km.',
+          sub=['a) Sao Hải Vương cách Mặt Trời khoảng bao nhiêu km?', 'b) Ánh sáng đi với tốc độ khoảng 300 000 km/s. Ánh sáng Mặt Trời đến Trái Đất mất bao lâu?', 'c) Làm mô hình Hệ Mặt Trời trên sân trường với tỉ lệ 1 AU ứng với 10 cm. Sao Hải Vương đặt cách quả cầu "Mặt Trời" bao nhiêu mét?'], lines=3,
+          a='a) 30,1 × 150 = 4515 triệu km ≈ 4,5 tỉ km. b) 150 000 000 : 300 000 = 500 s = 8 phút 20 giây. c) 30,1 × 10 = 301 cm ≈ 3 m.')],
+ tt=[dict(t='🔥 Sao Kim nóng nhất.', q='Sao Kim ở xa Mặt Trời hơn Sao Thủy nhưng lại là hành tinh nóng nhất, vì Sao Kim có lớp khí quyển rất dày chứa nhiều khí carbon dioxide giữ nhiệt. Điều này nhắc nhở con người điều gì về Trái Đất?', lines=2,
+          a='Khí carbon dioxide giữ nhiệt (hiệu ứng nhà kính). Nếu con người thải quá nhiều khí này, Trái Đất sẽ nóng lên (biến đổi khí hậu) → cần tiết kiệm năng lượng, trồng cây, dùng năng lượng sạch.')],
+ fact='Từ năm 2006, Sao Diêm Vương không còn được xếp là hành tinh mà được xếp vào nhóm "hành tinh lùn". Vì vậy Hệ Mặt Trời hiện chỉ còn 8 hành tinh.',
+ job='nhà khoa học hành tinh, kĩ sư tên lửa, kĩ sư điều khiển vệ tinh.')
+
+L55 = dict(num=55, title='Ngân Hà', en='The Milky Way', icon='🌌',
+ root='NGÂN HÀ',
+ br=[('Sao & chòm sao', ['<b>Sao</b>: thiên thể <b>tự phát sáng</b> (như Mặt Trời). Hành tinh, Mặt Trăng không tự phát sáng.', '<b>Chòm sao</b>: nhóm sao trông gần nhau, tạo thành hình dạng nhất định (Đại Hùng, Tiểu Hùng, Thiên Hậu, Lạp Hộ…).',
+                         '<b>Sao Bắc Cực</b> (chòm Tiểu Hùng) dùng để xác định hướng Bắc.']),
+     ('Ngân Hà', ['Là <b>thiên hà</b> chứa Hệ Mặt Trời.', 'Gồm <b>hàng trăm tỉ ngôi sao</b>, cùng bụi và khí.', 'Có dạng <b>đĩa xoắn ốc</b>; Hệ Mặt Trời nằm trên một nhánh xoắn, cách xa tâm.']),
+     ('Dải Ngân Hà & năm ánh sáng', ['Dải sáng mờ vắt ngang bầu trời đêm là hình ảnh Ngân Hà khi ta nhìn <b>từ bên trong</b> nó.', '<b>Năm ánh sáng</b>: quãng đường ánh sáng đi được trong 1 năm, khoảng <b>9 460 tỉ km</b>.',
+                                    'Ngân Hà rộng khoảng <b>100 000 năm ánh sáng</b>.'])],
+ mc=[('Hệ Mặt Trời nằm trong thiên hà', ['Tiên Nữ.', 'Tam Giác.', '*Ngân Hà.', 'Đại Hùng.']),
+     ('Thiên thể nào sau đây tự phát sáng?', ['*Ngôi sao.', 'Hành tinh.', 'Mặt Trăng.', 'Vệ tinh nhân tạo.']),
+     ('Ngân Hà có dạng', ['hình vuông.', 'khối cầu đặc.', 'hình tam giác.', '*đĩa xoắn ốc.']),
+     ('Ngân Hà chứa khoảng', ['vài chục ngôi sao.', '*hàng trăm tỉ ngôi sao.', '8 ngôi sao.', 'một nghìn ngôi sao.']),
+     ('Ngôi sao thường được dùng để xác định hướng Bắc vào ban đêm là', ['Sao Kim (Sao Mai).', 'Sao Hỏa.', '*Sao Bắc Cực.', 'Mặt Trăng.']),
+     ('Dải Ngân Hà nhìn thấy trên bầu trời đêm là', ['*hình ảnh của Ngân Hà khi ta nhìn từ bên trong nó.', 'một đám mây trên cao.', 'khói bụi trong không khí.', 'vệt khói của máy bay.']),
+     ('Năm ánh sáng là đơn vị đo', ['thời gian.', '*khoảng cách.', 'khối lượng.', 'nhiệt độ.']),
+     ('Ngôi sao gần nhất (sau Mặt Trời) cách Trái Đất khoảng 4,2 năm ánh sáng. Ánh sáng từ ngôi sao đó đến Trái Đất mất khoảng', ['4,2 giây.', '4,2 phút.', '4,2 ngày.', '*4,2 năm.'])],
+ ds=('Về Ngân Hà và các ngôi sao:', [('Mặt Trời là một ngôi sao trong Ngân Hà.', 'Đ'), ('Hệ Mặt Trời nằm ở chính tâm của Ngân Hà.', 'S'),
+                                   ('Sao Kim (Sao Mai, Sao Hôm) là một ngôi sao tự phát sáng.', 'S'), ('Năm ánh sáng là một đơn vị đo thời gian.', 'S')]),
+ ds_note='Ý c) sai: Sao Kim là hành tinh, sáng do phản chiếu ánh sáng Mặt Trời',
+ tl=[dict(lvl='cb', q='Phân biệt <b>sao</b> và <b>hành tinh</b> bằng cách hoàn thành bảng:',
+          html='<table class="t"><tr><th></th><th>Sao</th><th>Hành tinh</th></tr><tr><td class="l">Có tự phát sáng không?</td><td class="e"></td><td></td></tr><tr><td class="l">Ví dụ</td><td class="e"></td><td></td></tr></table>', lines=0,
+          a='Sao: tự phát sáng; ví dụ Mặt Trời, Sao Bắc Cực, Sao Thiên Lang. Hành tinh: không tự phát sáng (phản chiếu ánh sáng Mặt Trời); ví dụ Trái Đất, Sao Kim, Sao Hỏa.'),
+     dict(lvl='nc', q='Biết 1 năm ánh sáng ≈ 9 460 tỉ km.',
+          sub=['a) Ngân Hà rộng khoảng 100 000 năm ánh sáng. Đổi khoảng cách đó ra km.', 'b) Ánh sáng cần bao lâu để đi hết bề rộng của Ngân Hà?', 'c) Vì sao các nhà thiên văn dùng "năm ánh sáng" thay cho km khi đo khoảng cách giữa các ngôi sao?'], lines=3,
+          a='a) 9 460 × 100 000 = 946 000 000 tỉ km. b) Khoảng 100 000 năm. c) Vì khoảng cách quá lớn, dùng km sẽ ra những con số rất dài, khó đọc, khó so sánh.')],
+ tt=[dict(t='🏙️ Bầu trời thành phố.', q='Vì sao ở thành phố rất khó nhìn thấy Dải Ngân Hà, còn ở vùng núi, hải đảo xa lại nhìn rõ hơn? Em đề xuất một việc làm để giảm "ô nhiễm ánh sáng".', lines=3,
+          a='Ở thành phố có quá nhiều đèn chiếu sáng, biển quảng cáo (ô nhiễm ánh sáng) và khói bụi làm bầu trời sáng mờ, che khuất các ngôi sao. Đề xuất: tắt đèn không cần thiết, dùng đèn chiếu xuống dưới, có chụp đèn…')],
+ fact='Kính viễn vọng không gian James Webb (phóng năm 2021) đã chụp được những thiên hà rất xa, hình thành chỉ vài trăm triệu năm sau khi vũ trụ ra đời.',
+ job='nhà thiên văn học, kĩ sư quang học, kĩ sư vũ trụ.')
+
+LESSONS = [L52, L53, L54, L55]

@@ -1,0 +1,990 @@
+<title>Kho KHTN</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+:root {
+  --bg: #f8f9fb; --bg2: #ffffff; --bg3: #eef1f6;
+  --fg: #1a1d23; --fg2: #4a5068; --fg3: #8891a5;
+  --accent: #2563eb; --accent2: #1d4ed8; --accent-bg: #eff6ff;
+  --green: #16a34a; --green-bg: #f0fdf4;
+  --red: #dc2626; --red-bg: #fef2f2;
+  --orange: #ea580c; --orange-bg: #fff7ed;
+  --border: #dfe3ec; --shadow: rgba(0,0,0,.06);
+  --radius: 10px; --radius-sm: 6px;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1117; --bg2: #1a1d26; --bg3: #252832;
+  --fg: #e8eaf0; --fg2: #a0a8be; --fg3: #6b7490;
+  --accent: #60a5fa; --accent2: #93bbfd; --accent-bg: #1e293b;
+  --green: #4ade80; --green-bg: #052e16;
+  --red: #f87171; --red-bg: #450a0a;
+  --orange: #fb923c; --orange-bg: #431407;
+  --border: #2d3142; --shadow: rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"] {
+  --bg: #0f1117; --bg2: #1a1d26; --bg3: #252832;
+  --fg: #e8eaf0; --fg2: #a0a8be; --fg3: #6b7490;
+  --accent: #60a5fa; --accent2: #93bbfd; --accent-bg: #1e293b;
+  --green: #4ade80; --green-bg: #052e16;
+  --red: #f87171; --red-bg: #450a0a;
+  --orange: #fb923c; --orange-bg: #431407;
+  --border: #2d3142; --shadow: rgba(0,0,0,.3);
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+  max-width: 960px; margin: 0 auto;
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Header */
+.hdr { padding: 20px 0 12px; text-align: center; }
+.hdr h1 { font-size: 1.35rem; font-weight: 700; margin: 0; color: var(--accent); }
+.hdr p { font-size: .82rem; color: var(--fg2); margin: 4px 0 0; }
+.mode-badge {
+  display: inline-block; font-size: .7rem; font-weight: 600;
+  padding: 2px 10px; border-radius: 20px; margin-top: 6px;
+  background: var(--accent-bg); color: var(--accent);
+}
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border); padding-bottom: 0; margin-bottom: 16px; overflow-x: auto; }
+.tab {
+  padding: 8px 16px; font-size: .85rem; font-weight: 500; cursor: pointer;
+  border: none; background: none; color: var(--fg2);
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  white-space: nowrap; transition: all .15s;
+}
+.tab:hover { color: var(--fg); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+/* Grade tabs */
+.grade-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.grade-btn {
+  padding: 6px 18px; font-size: .85rem; font-weight: 600; cursor: pointer;
+  border: 2px solid var(--border); background: var(--bg2); color: var(--fg2);
+  border-radius: 20px; transition: all .15s;
+}
+.grade-btn:hover { border-color: var(--accent); color: var(--accent); }
+.grade-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Filters */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+.filters select, .filters input {
+  padding: 7px 12px; font-size: .82rem; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--bg2); color: var(--fg);
+  font-family: inherit; min-width: 0;
+}
+.filters select { max-width: 200px; }
+
+/* Cards / Questions */
+.card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 3px var(--shadow);
+}
+.card .q-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.q-num { font-weight: 700; color: var(--accent); font-size: .82rem; white-space: nowrap; }
+.q-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.q-tag {
+  font-size: .65rem; padding: 2px 7px; border-radius: 10px; font-weight: 500;
+  white-space: nowrap;
+}
+.q-tag.nb { background: var(--green-bg); color: var(--green); }
+.q-tag.th { background: var(--orange-bg); color: var(--orange); }
+.q-tag.vd { background: var(--red-bg); color: var(--red); }
+.q-tag.type-tag { background: var(--accent-bg); color: var(--accent); }
+.q-stem { font-size: .88rem; line-height: 1.55; margin-bottom: 8px; }
+.q-stem b { font-weight: 600; }
+.q-opts { list-style: none; padding: 0; margin: 0; }
+.q-opts li {
+  padding: 7px 12px; margin-bottom: 4px; border-radius: var(--radius-sm);
+  font-size: .84rem; cursor: pointer; border: 1px solid var(--border);
+  transition: all .15s; display: flex; align-items: flex-start; gap: 8px;
+}
+.q-opts li:hover { background: var(--bg3); }
+.q-opts li .opt-letter {
+  font-weight: 600; color: var(--fg2); min-width: 18px;
+}
+.q-opts li.selected { border-color: var(--accent); background: var(--accent-bg); }
+.q-opts li.correct { border-color: var(--green); background: var(--green-bg); }
+.q-opts li.wrong { border-color: var(--red); background: var(--red-bg); }
+
+/* DS items */
+.ds-items { display: flex; flex-direction: column; gap: 6px; }
+.ds-item {
+  display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  font-size: .84rem;
+}
+.ds-btns { display: flex; gap: 4px; flex-shrink: 0; }
+.ds-btn {
+  padding: 3px 10px; font-size: .75rem; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 4px; background: var(--bg);
+  color: var(--fg2); transition: all .15s;
+}
+.ds-btn:hover { border-color: var(--accent); }
+.ds-btn.sel-d { background: var(--green); color: #fff; border-color: var(--green); }
+.ds-btn.sel-s { background: var(--red); color: #fff; border-color: var(--red); }
+.ds-item.correct-item { background: var(--green-bg); border-color: var(--green); }
+.ds-item.wrong-item { background: var(--red-bg); border-color: var(--red); }
+
+/* TL answer */
+.tl-area {
+  width: 100%; min-height: 70px; padding: 8px 12px; font-size: .84rem;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); color: var(--fg); font-family: inherit; resize: vertical;
+}
+
+/* Answer reveal */
+.answer-box {
+  margin-top: 10px; padding: 10px 14px; border-radius: var(--radius-sm);
+  font-size: .82rem; line-height: 1.5;
+}
+.answer-box.show { background: var(--green-bg); border: 1px solid var(--green); }
+.answer-box b { font-weight: 600; }
+
+/* Buttons */
+.btn {
+  padding: 8px 20px; font-size: .84rem; font-weight: 600; cursor: pointer;
+  border: none; border-radius: var(--radius-sm); transition: all .15s;
+  font-family: inherit; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent2); }
+.btn-outline { background: var(--bg2); color: var(--accent); border: 1px solid var(--accent); }
+.btn-outline:hover { background: var(--accent-bg); }
+.btn-sm { padding: 5px 12px; font-size: .78rem; }
+.btn-danger { background: var(--red); color: #fff; }
+
+/* Exam builder */
+.exam-config { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.exam-config label { font-size: .82rem; font-weight: 500; display: flex; flex-direction: column; gap: 4px; }
+.exam-config select, .exam-config input {
+  padding: 7px 10px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg2); color: var(--fg); font-family: inherit; font-size: .82rem;
+}
+
+/* Checkbox in bank */
+.q-check { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+
+/* Stats bar */
+.stats-bar {
+  display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 16px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  margin-bottom: 14px; font-size: .8rem; color: var(--fg2);
+}
+.stats-bar b { color: var(--fg); }
+
+/* Pagination */
+.pager { display: flex; justify-content: center; gap: 8px; margin: 16px 0; align-items: center; }
+.pager button {
+  padding: 6px 14px; font-size: .8rem; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--bg2); color: var(--fg2);
+  cursor: pointer; font-family: inherit;
+}
+.pager button:hover { border-color: var(--accent); color: var(--accent); }
+.pager button:disabled { opacity: .4; cursor: default; }
+.pager span { font-size: .8rem; color: var(--fg2); }
+
+/* Score panel */
+.score-panel {
+  text-align: center; padding: 20px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0;
+}
+.score-big { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+.score-label { font-size: .85rem; color: var(--fg2); margin-top: 4px; }
+
+/* Exam preview */
+.exam-preview { background: var(--bg2); padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); }
+.exam-preview h2 { font-size: 1.1rem; text-align: center; margin: 0 0 4px; }
+.exam-preview h3 { font-size: .9rem; text-align: center; margin: 0 0 16px; color: var(--fg2); font-weight: 400; }
+.exam-section-title { font-weight: 700; font-size: .88rem; margin: 16px 0 8px; color: var(--accent); }
+
+/* Selected questions list */
+.selected-list { margin-bottom: 14px; }
+.selected-item {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  border-bottom: 1px solid var(--border); font-size: .82rem;
+}
+.selected-item .remove-btn {
+  cursor: pointer; color: var(--red); font-size: .9rem; padding: 2px 6px;
+  border: none; background: none;
+}
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--fg); color: var(--bg); padding: 10px 24px;
+  border-radius: 20px; font-size: .82rem; font-weight: 500;
+  z-index: 999; opacity: 0; transition: opacity .3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+/* Loading */
+.loading { text-align: center; padding: 40px; color: var(--fg2); }
+.spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .hdr h1 { font-size: 1.15rem; }
+  .tab { padding: 6px 10px; font-size: .8rem; }
+  .grade-btn { padding: 5px 14px; font-size: .8rem; }
+  .exam-config { grid-template-columns: 1fr; }
+  .filters { flex-direction: column; }
+  .filters select, .filters input { max-width: 100%; width: 100%; }
+}
+
+[hidden] { display: none !important; }
+</style>
+
+<div class="hdr">
+  <h1>🔬 Kho Học Liệu KHTN</h1>
+  <p>Bộ sách Kết nối tri thức với cuộc sống — Lớp 6 · 7 · 8 · 9</p>
+  <div class="mode-badge" id="modeBadge">Đang tải...</div>
+</div>
+
+<div class="tabs" id="mainTabs"></div>
+<div id="app"><div class="loading"><div class="spinner"></div><p>Đang tải ngân hàng câu hỏi...</p></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(async function(){
+  // ====== State ======
+  let BANK=[], CURRICULUM={}, isTeacher=false;
+  let downloadsNS=null, userNS=null;
+  let currentTab='practice', currentGrade='9', currentPage=0;
+  const PER_PAGE=20;
+  // Exam builder state
+  let selectedQs=[], examCodes=[], examConfig={numCodes:1};
+
+  // ====== Init ======
+  const [bankRes, curRes] = await Promise.all([
+    fetch('bank.json').then(r=>r.json()),
+    fetch('curriculum.json').then(r=>r.json())
+  ]);
+  BANK=bankRes; CURRICULUM=curRes;
+
+  // Capabilities
+  if(window.claude){
+    try{
+      userNS=await claude.use('user');
+      if(userNS){
+        isTeacher=await userNS.isOwner()||await userNS.canEdit();
+      }
+    }catch(e){}
+    try{ downloadsNS=await claude.use('downloads'); }catch(e){}
+  }
+
+  document.getElementById('modeBadge').textContent=isTeacher?'👩‍🏫 Chế độ Giáo viên':'🎓 Chế độ Học sinh';
+
+  // ====== Render main tabs ======
+  function renderTabs(){
+    const tabs=isTeacher
+      ?[{id:'bank',label:'📚 Ngân hàng'},{id:'exam',label:'📝 Bốc đề'},{id:'practice',label:'✏️ Luyện tập'}]
+      :[{id:'practice',label:'✏️ Luyện tập'}];
+    if(isTeacher) currentTab='bank';
+    const el=document.getElementById('mainTabs');
+    el.innerHTML='';
+    tabs.forEach(t=>{
+      const b=document.createElement('button');
+      b.className='tab'+(t.id===currentTab?' active':'');
+      b.textContent=t.label;
+      b.onclick=()=>{currentTab=t.id;currentPage=0;renderTabs();renderView();};
+      el.appendChild(b);
+    });
+  }
+
+  function renderView(){
+    const app=document.getElementById('app');
+    if(currentTab==='bank') renderBank(app);
+    else if(currentTab==='exam') renderExam(app);
+    else renderPractice(app);
+  }
+
+  // ====== Helpers ======
+  const TYPE_LABELS={mc:'Trắc nghiệm',ds:'Đúng/Sai',tl:'Tự luận',tt:'Thực tiễn'};
+  const LEVEL_LABELS={NB:'Nhận biết',TH:'Thông hiểu',VD:'Vận dụng'};
+  const LETTERS=['A','B','C','D','E','F'];
+
+  function getSubjects(grade){
+    const s=new Set();
+    BANK.forEach(q=>{if(String(q.grade)===grade) s.add(q.subject);});
+    return [...s];
+  }
+  function getLessons(grade, subject){
+    const chapters=CURRICULUM[grade]||[];
+    const lessons=[];
+    chapters.forEach(ch=>{
+      ch.lessons.forEach(l=>{
+        if(!subject||l.subject===subject) lessons.push(l);
+      });
+    });
+    return lessons;
+  }
+  function filterBank(grade, filters={}){
+    return BANK.filter(q=>{
+      if(String(q.grade)!==grade) return false;
+      if(filters.subject && q.subject!==filters.subject) return false;
+      if(filters.lesson && q.lesson!==Number(filters.lesson)) return false;
+      if(filters.type && q.type!==filters.type) return false;
+      if(filters.level && q.level!==filters.level) return false;
+      if(filters.search){
+        const s=filters.search.toLowerCase();
+        if(!q.stem.toLowerCase().includes(s)) return false;
+      }
+      return true;
+    });
+  }
+  function toast(msg){
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2500);
+  }
+  function shuffleArray(arr){
+    const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
+  }
+
+  // ====== BANK VIEW (Teacher) ======
+  let bankFilters={subject:'',lesson:'',type:'',level:'',search:''};
+
+  function renderBank(app){
+    const qs=filterBank(currentGrade, bankFilters);
+    const totalPages=Math.ceil(qs.length/PER_PAGE);
+    if(currentPage>=totalPages) currentPage=Math.max(0,totalPages-1);
+    const pageQs=qs.slice(currentPage*PER_PAGE,(currentPage+1)*PER_PAGE);
+
+    const subjects=getSubjects(currentGrade);
+    const lessons=getLessons(currentGrade, bankFilters.subject);
+
+    let h='';
+    // Grade tabs
+    h+='<div class="grade-tabs">';
+    ['6','7','8','9'].forEach(g=>{
+      h+=`<button class="grade-btn${currentGrade===g?' active':''}" data-g="${g}">Lớp ${g}</button>`;
+    });
+    h+='</div>';
+
+    // Filters
+    h+='<div class="filters">';
+    h+='<select id="fSubject"><option value="">Tất cả phân môn</option>';
+    subjects.forEach(s=>{h+=`<option value="${s}"${bankFilters.subject===s?' selected':''}>${s}</option>`;});
+    h+='</select>';
+    h+='<select id="fLesson"><option value="">Tất cả bài</option>';
+    lessons.forEach(l=>{h+=`<option value="${l.num}"${bankFilters.lesson===String(l.num)?' selected':''}>${l.num}. ${l.title}</option>`;});
+    h+='</select>';
+    h+='<select id="fType"><option value="">Tất cả dạng</option>';
+    Object.entries(TYPE_LABELS).forEach(([k,v])=>{h+=`<option value="${k}"${bankFilters.type===k?' selected':''}>${v}</option>`;});
+    h+='</select>';
+    h+='<select id="fLevel"><option value="">Tất cả mức</option>';
+    Object.entries(LEVEL_LABELS).forEach(([k,v])=>{h+=`<option value="${k}"${bankFilters.level===k?' selected':''}>${v}</option>`;});
+    h+='</select>';
+    h+=`<input type="text" placeholder="Tìm kiếm..." id="fSearch" value="${bankFilters.search||''}">`;
+    h+='</div>';
+
+    // Stats
+    const typeCounts={mc:0,ds:0,tl:0,tt:0};
+    qs.forEach(q=>{typeCounts[q.type]=(typeCounts[q.type]||0)+1;});
+    h+='<div class="stats-bar">';
+    h+=`<span>Tổng: <b>${qs.length}</b> câu</span>`;
+    Object.entries(TYPE_LABELS).forEach(([k,v])=>{h+=`<span>${v}: <b>${typeCounts[k]||0}</b></span>`;});
+    if(selectedQs.length>0) h+=`<span style="color:var(--accent)">Đã chọn: <b>${selectedQs.length}</b></span>`;
+    h+='</div>';
+
+    // Selected actions
+    if(selectedQs.length>0){
+      h+='<div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">';
+      h+='<button class="btn btn-primary btn-sm" id="btnPreview">👁 Xem đề ('+selectedQs.length+' câu)</button>';
+      h+='<button class="btn btn-outline btn-sm" id="btnClear">✕ Bỏ chọn tất cả</button>';
+      h+='</div>';
+    }
+
+    // Questions
+    pageQs.forEach((q,i)=>{
+      const checked=selectedQs.includes(q.id);
+      h+=`<div class="card">`;
+      h+=`<div class="q-header">`;
+      h+=`<div style="display:flex;align-items:center;gap:8px">`;
+      h+=`<input type="checkbox" class="q-check" data-id="${q.id}"${checked?' checked':''}>`;
+      h+=`<span class="q-num">${q.id} · Bài ${q.lesson}</span>`;
+      h+=`</div>`;
+      h+=`<div class="q-tags">`;
+      h+=`<span class="q-tag type-tag">${TYPE_LABELS[q.type]||q.type}</span>`;
+      h+=`<span class="q-tag ${q.level.toLowerCase()}">${LEVEL_LABELS[q.level]||q.level}</span>`;
+      h+=`</div></div>`;
+      h+=`<div class="q-stem">${q.stem}</div>`;
+      if(q.type==='mc'&&q.options){
+        h+='<ol class="q-opts" style="list-style:none;padding:0">';
+        q.options.forEach((o,j)=>{
+          const isAns=j===q.answer;
+          h+=`<li style="${isAns?'background:var(--green-bg);border-color:var(--green)':''}"><span class="opt-letter">${LETTERS[j]}.</span> ${o}</li>`;
+        });
+        h+='</ol>';
+      }
+      if(q.type==='ds'&&q.items){
+        h+='<div class="ds-items">';
+        q.items.forEach((it,j)=>{
+          h+=`<div class="ds-item"><span style="min-width:20px;font-weight:600;color:var(--fg2)">${String.fromCharCode(97+j)})</span><span style="flex:1">${it.text}</span><span style="font-weight:600;color:${it.answer==='Đ'?'var(--green)':'var(--red)'}">${it.answer}</span></div>`;
+        });
+        h+='</div>';
+      }
+      if((q.type==='tl'||q.type==='tt')&&q.answer){
+        h+=`<div class="answer-box show"><b>Đáp án:</b> ${q.answer}</div>`;
+      }
+      h+=`</div>`;
+    });
+
+    // Pager
+    if(totalPages>1){
+      h+='<div class="pager">';
+      h+=`<button ${currentPage===0?'disabled':''} data-pg="${currentPage-1}">← Trước</button>`;
+      h+=`<span>Trang ${currentPage+1}/${totalPages}</span>`;
+      h+=`<button ${currentPage>=totalPages-1?'disabled':''} data-pg="${currentPage+1}">Sau →</button>`;
+      h+='</div>';
+    }
+
+    app.innerHTML=h;
+
+    // Events
+    app.querySelectorAll('.grade-btn').forEach(b=>b.onclick=()=>{
+      currentGrade=b.dataset.g; currentPage=0; bankFilters={subject:'',lesson:'',type:'',level:'',search:''};
+      renderBank(app);
+    });
+    const fSub=app.querySelector('#fSubject');
+    const fLes=app.querySelector('#fLesson');
+    const fTyp=app.querySelector('#fType');
+    const fLev=app.querySelector('#fLevel');
+    const fSrc=app.querySelector('#fSearch');
+    if(fSub) fSub.onchange=()=>{bankFilters.subject=fSub.value;bankFilters.lesson='';currentPage=0;renderBank(app);};
+    if(fLes) fLes.onchange=()=>{bankFilters.lesson=fLes.value;currentPage=0;renderBank(app);};
+    if(fTyp) fTyp.onchange=()=>{bankFilters.type=fTyp.value;currentPage=0;renderBank(app);};
+    if(fLev) fLev.onchange=()=>{bankFilters.level=fLev.value;currentPage=0;renderBank(app);};
+    if(fSrc) fSrc.oninput=()=>{bankFilters.search=fSrc.value;currentPage=0;renderBank(app);};
+    app.querySelectorAll('.q-check').forEach(cb=>cb.onchange=()=>{
+      const id=cb.dataset.id;
+      if(cb.checked){if(!selectedQs.includes(id))selectedQs.push(id);}
+      else{selectedQs=selectedQs.filter(x=>x!==id);}
+      renderBank(app);
+    });
+    app.querySelectorAll('.pager button').forEach(b=>b.onclick=()=>{
+      if(!b.disabled){currentPage=Number(b.dataset.pg);renderBank(app);window.scrollTo(0,0);}
+    });
+    const btnP=app.querySelector('#btnPreview');
+    if(btnP) btnP.onclick=()=>{currentTab='exam';selectedFromBank=true;renderTabs();renderView();};
+    const btnC=app.querySelector('#btnClear');
+    if(btnC) btnC.onclick=()=>{selectedQs=[];renderBank(app);};
+  }
+
+  let selectedFromBank=false;
+
+  // ====== EXAM BUILDER (Teacher) ======
+  function renderExam(app){
+    let h='';
+    h+='<div class="grade-tabs">';
+    ['6','7','8','9'].forEach(g=>{
+      h+=`<button class="grade-btn${currentGrade===g?' active':''}" data-g="${g}">Lớp ${g}</button>`;
+    });
+    h+='</div>';
+
+    if(selectedQs.length>0 && selectedFromBank){
+      // Already have selected questions - show exam preview
+      renderExamPreview(app);
+      return;
+    }
+
+    // Auto-generate config
+    h+=`<h3 style="font-size:.95rem;margin:0 0 12px">Tạo đề tự động</h3>`;
+    h+='<div class="exam-config">';
+    h+='<label>Phân môn<select id="exSubject"><option value="">Tất cả</option>';
+    getSubjects(currentGrade).forEach(s=>{h+=`<option value="${s}">${s}</option>`;});
+    h+='</select></label>';
+
+    const lessons=getLessons(currentGrade,'');
+    h+='<label>Phạm vi bài<select id="exLesson"><option value="">Tất cả bài</option>';
+    lessons.forEach(l=>{h+=`<option value="${l.num}">${l.num}. ${l.title}</option>`;});
+    h+='</select></label>';
+
+    h+='<label>Số TN nhiều lựa chọn<input type="number" id="exMC" value="12" min="0" max="50"></label>';
+    h+='<label>Số câu Đúng/Sai<input type="number" id="exDS" value="2" min="0" max="20"></label>';
+    h+='<label>Số câu Tự luận<input type="number" id="exTL" value="4" min="0" max="20"></label>';
+    h+='<label>Số câu Thực tiễn<input type="number" id="exTT" value="2" min="0" max="10"></label>';
+    h+='<label>Số mã đề<input type="number" id="exCodes" value="1" min="1" max="8"></label>';
+    h+='</div>';
+    h+='<button class="btn btn-primary" id="btnGenerate">🎲 Bốc đề ngẫu nhiên</button>';
+    h+=' <button class="btn btn-outline" id="btnGoBank" style="margin-left:8px">📚 Chọn từ ngân hàng</button>';
+
+    // If exam codes exist, show preview
+    if(examCodes.length>0){
+      h+='<hr style="border:none;border-top:1px solid var(--border);margin:20px 0">';
+      h+=renderExamCodesHTML();
+    }
+
+    app.innerHTML=h;
+
+    // Grade events
+    app.querySelectorAll('.grade-btn').forEach(b=>b.onclick=()=>{
+      currentGrade=b.dataset.g; examCodes=[]; renderExam(app);
+    });
+
+    app.querySelector('#btnGenerate').onclick=()=>{
+      const subject=app.querySelector('#exSubject').value;
+      const lesson=app.querySelector('#exLesson').value;
+      const mcN=Number(app.querySelector('#exMC').value);
+      const dsN=Number(app.querySelector('#exDS').value);
+      const tlN=Number(app.querySelector('#exTL').value);
+      const ttN=Number(app.querySelector('#exTT').value);
+      const codes=Number(app.querySelector('#exCodes').value);
+
+      const pool=filterBank(currentGrade,{subject,lesson:lesson||undefined});
+      const picked=[];
+      function pickType(type, count){
+        const avail=shuffleArray(pool.filter(q=>q.type===type && !picked.includes(q)));
+        const take=avail.slice(0,count);
+        picked.push(...take);
+        if(take.length<count) toast(`Chỉ có ${take.length}/${count} câu ${TYPE_LABELS[type]}`);
+        return take;
+      }
+      const mcQs=pickType('mc',mcN);
+      const dsQs=pickType('ds',dsN);
+      const tlQs=pickType('tl',tlN);
+      const ttQs=pickType('tt',ttN);
+      const allQs=[...mcQs,...dsQs,...tlQs,...ttQs];
+
+      if(allQs.length===0){toast('Không tìm được câu hỏi phù hợp!');return;}
+
+      selectedQs=allQs.map(q=>q.id);
+      examCodes=[];
+      for(let c=0;c<codes;c++){
+        examCodes.push(generateCode(allQs, 100+c+1));
+      }
+      renderExam(app);
+    };
+
+    app.querySelector('#btnGoBank').onclick=()=>{currentTab='bank';renderTabs();renderView();};
+
+    // Export buttons
+    app.querySelectorAll('.btn-export-word').forEach(b=>b.onclick=()=>{
+      const ci=Number(b.dataset.code);
+      exportWord(examCodes[ci],ci);
+    });
+    app.querySelectorAll('.btn-export-pdf').forEach(b=>b.onclick=()=>{
+      const ci=Number(b.dataset.code);
+      exportPDF(examCodes[ci],ci);
+    });
+    const btnAll=app.querySelector('#btnExportAll');
+    if(btnAll) btnAll.onclick=()=>exportAllWord();
+  }
+
+  function generateCode(questions, codeNum){
+    // Shuffle MC questions and their options
+    const code={num:codeNum, sections:[]};
+    const mcQs=questions.filter(q=>q.type==='mc');
+    const dsQs=questions.filter(q=>q.type==='ds');
+    const tlQs=questions.filter(q=>q.type==='tl');
+    const ttQs=questions.filter(q=>q.type==='tt');
+
+    // Shuffle MC
+    const shuffledMC=shuffleArray(mcQs).map(q=>{
+      const optPairs=q.options.map((o,i)=>({text:o,origIdx:i}));
+      const shuffled=shuffleArray(optPairs);
+      return {...q, options:shuffled.map(p=>p.text), answer:shuffled.findIndex(p=>p.origIdx===q.answer)};
+    });
+    if(shuffledMC.length) code.sections.push({title:'I. TRẮC NGHIỆM NHIỀU LỰA CHỌN',type:'mc',questions:shuffledMC});
+
+    // Shuffle DS order (keep items within each question)
+    const shuffledDS=shuffleArray(dsQs);
+    if(shuffledDS.length) code.sections.push({title:'II. TRẮC NGHIỆM ĐÚNG/SAI',type:'ds',questions:shuffledDS});
+
+    // Shuffle TL
+    const shuffledTL=shuffleArray(tlQs);
+    if(shuffledTL.length) code.sections.push({title:'III. TỰ LUẬN',type:'tl',questions:shuffledTL});
+
+    // Shuffle TT
+    const shuffledTT=shuffleArray(ttQs);
+    if(shuffledTT.length) code.sections.push({title:'IV. THỰC TIỄN / SONG NGỮ',type:'tt',questions:shuffledTT});
+
+    return code;
+  }
+
+  function renderExamCodesHTML(){
+    let h='';
+    if(examCodes.length>1){
+      h+='<div style="margin-bottom:12px"><button class="btn btn-primary btn-sm" id="btnExportAll">📥 Xuất tất cả mã đề (Word)</button></div>';
+    }
+    examCodes.forEach((code,ci)=>{
+      h+=`<div class="exam-preview" style="margin-bottom:16px">`;
+      h+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">`;
+      h+=`<h2 style="margin:0;font-size:1rem">Mã đề: ${code.num}</h2>`;
+      h+=`<div style="display:flex;gap:6px">`;
+      h+=`<button class="btn btn-outline btn-sm btn-export-word" data-code="${ci}">📄 Word</button>`;
+      h+=`<button class="btn btn-outline btn-sm btn-export-pdf" data-code="${ci}">📑 PDF</button>`;
+      h+=`</div></div>`;
+
+      let qNum=1;
+      code.sections.forEach(sec=>{
+        h+=`<div class="exam-section-title">${sec.title}</div>`;
+        sec.questions.forEach(q=>{
+          h+=`<div style="margin-bottom:10px">`;
+          h+=`<div class="q-stem"><b>Câu ${qNum}.</b> ${q.stem}</div>`;
+          if(q.type==='mc'&&q.options){
+            q.options.forEach((o,j)=>{
+              const isAns=j===q.answer;
+              h+=`<div style="padding:2px 0 2px 20px;font-size:.84rem;${isAns?'color:var(--green);font-weight:600':''}">${LETTERS[j]}. ${o}${isAns?' ✓':''}</div>`;
+            });
+          }
+          if(q.type==='ds'&&q.items){
+            q.items.forEach((it,j)=>{
+              h+=`<div style="padding:2px 0 2px 20px;font-size:.84rem">${String.fromCharCode(97+j)}) ${it.text} → <b style="color:${it.answer==='Đ'?'var(--green)':'var(--red)'}">${it.answer}</b></div>`;
+            });
+          }
+          if((q.type==='tl'||q.type==='tt')&&q.answer){
+            h+=`<div style="padding:4px 0 2px 20px;font-size:.82rem;color:var(--green)"><b>Đáp án:</b> ${q.answer}</div>`;
+          }
+          h+=`</div>`;
+          qNum++;
+        });
+      });
+      h+=`</div>`;
+    });
+    return h;
+  }
+
+  function renderExamPreview(app){
+    // Build exam from selectedQs
+    const allQs=selectedQs.map(id=>BANK.find(q=>q.id===id)).filter(Boolean);
+    if(examCodes.length===0){
+      examCodes=[generateCode(allQs, 101)];
+    }
+    let h='';
+    h+='<div class="grade-tabs">';
+    ['6','7','8','9'].forEach(g=>{
+      h+=`<button class="grade-btn${currentGrade===g?' active':''}" data-g="${g}">Lớp ${g}</button>`;
+    });
+    h+='</div>';
+    h+=`<div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">`;
+    h+=`<button class="btn btn-outline btn-sm" id="btnBackBank">← Quay lại ngân hàng</button>`;
+    h+=`<button class="btn btn-outline btn-sm" id="btnAddCode">+ Thêm mã đề</button>`;
+    h+=`</div>`;
+    h+=renderExamCodesHTML();
+    app.innerHTML=h;
+
+    app.querySelectorAll('.grade-btn').forEach(b=>b.onclick=()=>{
+      currentGrade=b.dataset.g; examCodes=[]; selectedQs=[]; selectedFromBank=false;
+      renderExam(app);
+    });
+    app.querySelector('#btnBackBank').onclick=()=>{selectedFromBank=false;examCodes=[];currentTab='bank';renderTabs();renderView();};
+    app.querySelector('#btnAddCode').onclick=()=>{
+      const allQs2=selectedQs.map(id=>BANK.find(q=>q.id===id)).filter(Boolean);
+      examCodes.push(generateCode(allQs2, 100+examCodes.length+1));
+      renderExamPreview(app);
+    };
+    app.querySelectorAll('.btn-export-word').forEach(b=>b.onclick=()=>{
+      exportWord(examCodes[Number(b.dataset.code)],Number(b.dataset.code));
+    });
+    app.querySelectorAll('.btn-export-pdf').forEach(b=>b.onclick=()=>{
+      exportPDF(examCodes[Number(b.dataset.code)],Number(b.dataset.code));
+    });
+    const btnAll=app.querySelector('#btnExportAll');
+    if(btnAll) btnAll.onclick=()=>exportAllWord();
+  }
+
+  // ====== PRACTICE VIEW (Student) ======
+  let practiceState={answers:{},submitted:false,questions:[],lessonFilter:''};
+
+  function renderPractice(app){
+    let h='';
+    h+='<div class="grade-tabs">';
+    ['6','7','8','9'].forEach(g=>{
+      h+=`<button class="grade-btn${currentGrade===g?' active':''}" data-g="${g}">Lớp ${g}</button>`;
+    });
+    h+='</div>';
+
+    // Lesson selector
+    const chapters=CURRICULUM[currentGrade]||[];
+    h+=`<div class="filters">`;
+    h+=`<select id="pLesson" style="max-width:100%;width:100%"><option value="">-- Chọn bài để luyện tập --</option>`;
+    chapters.forEach(ch=>{
+      h+=`<optgroup label="${ch.chapter}">`;
+      ch.lessons.forEach(l=>{
+        if(!l.hasQuestions) return;
+        h+=`<option value="${l.num}"${practiceState.lessonFilter===String(l.num)?' selected':''}>${l.num}. ${l.title}</option>`;
+      });
+      h+=`</optgroup>`;
+    });
+    h+=`</select></div>`;
+
+    if(practiceState.lessonFilter){
+      const qs=BANK.filter(q=>String(q.grade)===currentGrade && q.lesson===Number(practiceState.lessonFilter));
+      practiceState.questions=qs;
+
+      if(qs.length===0){
+        h+=`<div class="card"><p style="text-align:center;color:var(--fg2)">Chưa có câu hỏi cho bài này.</p></div>`;
+      } else {
+        // Stats
+        const typeCounts={mc:0,ds:0,tl:0,tt:0};
+        qs.forEach(q=>{typeCounts[q.type]++;});
+        h+='<div class="stats-bar">';
+        h+=`<span>Tổng: <b>${qs.length}</b> câu</span>`;
+        Object.entries(TYPE_LABELS).forEach(([k,v])=>{if(typeCounts[k])h+=`<span>${v}: <b>${typeCounts[k]}</b></span>`;});
+        h+='</div>';
+
+        if(practiceState.submitted){
+          // Show score
+          const score=calcScore(qs);
+          h+=`<div class="score-panel"><div class="score-big">${score.correct}/${score.total}</div>`;
+          h+=`<div class="score-label">${score.total>0?Math.round(score.correct/score.total*100):0}% — ${score.correct>=score.total*0.8?'Xuất sắc!':score.correct>=score.total*0.5?'Khá tốt!':'Cần cố gắng thêm!'}</div>`;
+          h+=`<button class="btn btn-primary" id="btnRetry" style="margin-top:12px">🔄 Làm lại</button></div>`;
+        }
+
+        qs.forEach((q,qi)=>{
+          h+=renderPracticeQuestion(q, qi, practiceState.submitted);
+        });
+
+        if(!practiceState.submitted){
+          h+=`<div style="text-align:center;margin:16px 0"><button class="btn btn-primary" id="btnSubmit" style="padding:12px 40px;font-size:.95rem">✅ Nộp bài</button></div>`;
+        }
+      }
+    }
+
+    app.innerHTML=h;
+
+    // Events
+    app.querySelectorAll('.grade-btn').forEach(b=>b.onclick=()=>{
+      currentGrade=b.dataset.g;
+      practiceState={answers:{},submitted:false,questions:[],lessonFilter:''};
+      renderPractice(app);
+    });
+    const pL=app.querySelector('#pLesson');
+    if(pL) pL.onchange=()=>{
+      practiceState={answers:{},submitted:false,questions:[],lessonFilter:pL.value};
+      renderPractice(app);
+    };
+
+    // MC option clicks
+    app.querySelectorAll('.mc-opt').forEach(li=>{
+      li.onclick=()=>{
+        if(practiceState.submitted) return;
+        const qid=li.dataset.qid, val=Number(li.dataset.val);
+        practiceState.answers[qid]={type:'mc',value:val};
+        renderPractice(app);
+      };
+    });
+
+    // DS button clicks
+    app.querySelectorAll('.ds-toggle').forEach(btn=>{
+      btn.onclick=()=>{
+        if(practiceState.submitted) return;
+        const qid=btn.dataset.qid, idx=Number(btn.dataset.idx), val=btn.dataset.val;
+        if(!practiceState.answers[qid]) practiceState.answers[qid]={type:'ds',value:{}};
+        practiceState.answers[qid].value[idx]=val;
+        renderPractice(app);
+      };
+    });
+
+    // Submit
+    const btnS=app.querySelector('#btnSubmit');
+    if(btnS) btnS.onclick=()=>{practiceState.submitted=true;renderPractice(app);window.scrollTo(0,0);};
+
+    const btnR=app.querySelector('#btnRetry');
+    if(btnR) btnR.onclick=()=>{
+      practiceState.answers={};practiceState.submitted=false;
+      renderPractice(app);
+    };
+  }
+
+  function renderPracticeQuestion(q, qi, submitted){
+    let h=`<div class="card">`;
+    h+=`<div class="q-header">`;
+    h+=`<span class="q-num">Câu ${qi+1}</span>`;
+    h+=`<div class="q-tags"><span class="q-tag type-tag">${TYPE_LABELS[q.type]}</span><span class="q-tag ${q.level.toLowerCase()}">${LEVEL_LABELS[q.level]}</span></div>`;
+    h+=`</div>`;
+    h+=`<div class="q-stem">${q.stem}</div>`;
+
+    if(q.type==='mc'&&q.options){
+      const userAns=practiceState.answers[q.id];
+      h+='<ul class="q-opts">';
+      q.options.forEach((o,j)=>{
+        let cls='mc-opt';
+        if(submitted){
+          if(j===q.answer) cls+=' correct';
+          else if(userAns && userAns.value===j) cls+=' wrong';
+        } else if(userAns && userAns.value===j){
+          cls+=' selected';
+        }
+        h+=`<li class="${cls}" data-qid="${q.id}" data-val="${j}"><span class="opt-letter">${LETTERS[j]}.</span> ${o}</li>`;
+      });
+      h+='</ul>';
+    }
+
+    if(q.type==='ds'&&q.items){
+      const userAns=practiceState.answers[q.id];
+      h+='<div class="ds-items">';
+      q.items.forEach((it,j)=>{
+        const userVal=userAns?.value?.[j];
+        let itemCls='ds-item';
+        if(submitted){
+          itemCls+=userVal===it.answer?' correct-item':' wrong-item';
+        }
+        h+=`<div class="${itemCls}">`;
+        h+=`<span style="min-width:20px;font-weight:600;color:var(--fg2)">${String.fromCharCode(97+j)})</span>`;
+        h+=`<span style="flex:1">${it.text}</span>`;
+        h+=`<div class="ds-btns">`;
+        h+=`<button class="ds-btn ds-toggle${userVal==='Đ'?' sel-d':''}" data-qid="${q.id}" data-idx="${j}" data-val="Đ">Đ</button>`;
+        h+=`<button class="ds-btn ds-toggle${userVal==='S'?' sel-s':''}" data-qid="${q.id}" data-idx="${j}" data-val="S">S</button>`;
+        h+=`</div></div>`;
+      });
+      h+='</div>';
+    }
+
+    if(q.type==='tl'||q.type==='tt'){
+      if(!submitted){
+        h+=`<textarea class="tl-area" placeholder="Viết câu trả lời..." data-qid="${q.id}"></textarea>`;
+      }
+    }
+
+    // Show answer after submit
+    if(submitted){
+      let answerText='';
+      if(q.type==='mc') answerText=`Đáp án: <b>${LETTERS[q.answer]}</b>. ${q.options[q.answer]}`;
+      else if(q.type==='ds') answerText='Đáp án: '+q.items.map((it,j)=>`${String.fromCharCode(97+j)}) ${it.answer}`).join(', ');
+      else answerText=`<b>Đáp án:</b> ${q.answer||'Xem hướng dẫn chấm'}`;
+      if(q.explanation) answerText+=`<br><b>Giải thích:</b> ${q.explanation}`;
+      h+=`<div class="answer-box show">${answerText}</div>`;
+    }
+
+    h+=`</div>`;
+    return h;
+  }
+
+  function calcScore(qs){
+    let correct=0, total=0;
+    qs.forEach(q=>{
+      if(q.type==='mc'){
+        total++;
+        const ans=practiceState.answers[q.id];
+        if(ans && ans.value===q.answer) correct++;
+      }
+      if(q.type==='ds'&&q.items){
+        total++;
+        const ans=practiceState.answers[q.id];
+        if(ans){
+          const allCorrect=q.items.every((it,j)=>ans.value?.[j]===it.answer);
+          if(allCorrect) correct++;
+        }
+      }
+    });
+    return {correct, total};
+  }
+
+  // ====== EXPORT ======
+  function buildExamHTML(code, withAnswers){
+    let h=`<div style="font-family:'Times New Roman',serif;font-size:12pt;max-width:700px;margin:0 auto;color:#000;background:#fff;padding:20px">`;
+    h+=`<div style="text-align:center;margin-bottom:6px"><b>TRƯỜNG THCS THIÊN LỘC</b></div>`;
+    h+=`<div style="text-align:center;margin-bottom:6px"><b>ĐỀ KIỂM TRA KHOA HỌC TỰ NHIÊN — LỚP ${currentGrade}</b></div>`;
+    h+=`<div style="text-align:center;margin-bottom:6px">Bộ sách: Kết nối tri thức với cuộc sống</div>`;
+    h+=`<div style="text-align:center;margin-bottom:16px"><b>Mã đề: ${code.num}</b></div>`;
+    h+=`<div style="display:flex;justify-content:space-between;margin-bottom:16px"><span>Họ và tên: .................................</span><span>Lớp: ........</span></div>`;
+
+    let qNum=1;
+    code.sections.forEach(sec=>{
+      h+=`<div style="font-weight:700;margin:14px 0 8px">${sec.title}</div>`;
+      if(sec.type==='mc'){
+        h+=`<div style="font-style:italic;font-size:11pt;margin-bottom:8px">Chọn phương án đúng nhất cho mỗi câu sau:</div>`;
+      }
+      if(sec.type==='ds'){
+        h+=`<div style="font-style:italic;font-size:11pt;margin-bottom:8px">Mỗi câu dưới đây có 4 ý. Hãy xác định mỗi ý Đúng hay Sai:</div>`;
+      }
+      sec.questions.forEach(q=>{
+        h+=`<div style="margin-bottom:10px">`;
+        h+=`<div><b>Câu ${qNum}.</b> ${q.stem}</div>`;
+        if(q.type==='mc'&&q.options){
+          q.options.forEach((o,j)=>{
+            h+=`<div style="padding-left:20px">${LETTERS[j]}. ${o}</div>`;
+          });
+        }
+        if(q.type==='ds'&&q.items){
+          q.items.forEach((it,j)=>{
+            h+=`<div style="padding-left:20px">${String.fromCharCode(97+j)}) ${it.text}</div>`;
+          });
+        }
+        if(q.type==='tl'||q.type==='tt'){
+          h+=`<div style="border-bottom:1px dotted #999;height:60px;margin:8px 0"></div>`;
+        }
+        h+=`</div>`;
+        qNum++;
+      });
+    });
+
+    if(withAnswers){
+      h+=`<div style="page-break-before:always"></div>`;
+      h+=`<div style="text-align:center;font-weight:700;margin:20px 0 12px;font-size:14pt">ĐÁP ÁN — Mã đề ${code.num}</div>`;
+      qNum=1;
+      code.sections.forEach(sec=>{
+        h+=`<div style="font-weight:700;margin:10px 0 6px">${sec.title}</div>`;
+        sec.questions.forEach(q=>{
+          h+=`<div style="margin-bottom:6px"><b>Câu ${qNum}:</b> `;
+          if(q.type==='mc') h+=`<b>${LETTERS[q.answer]}</b>`;
+          else if(q.type==='ds'&&q.items) h+=q.items.map((it,j)=>`${String.fromCharCode(97+j)}) ${it.answer}`).join('. ');
+          else h+=q.answer||'';
+          h+=`</div>`;
+          qNum++;
+        });
+      });
+    }
+    h+=`</div>`;
+    return h;
+  }
+
+  async function exportWord(code, codeIdx){
+    if(!downloadsNS){toast('Chức năng tải xuống không khả dụng');return;}
+    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:'Times New Roman',serif;font-size:12pt}</style></head><body>${buildExamHTML(code,true)}</body></html>`;
+    try{
+      await downloadsNS.save({filename:`De_KHTN${currentGrade}_Ma${code.num}.doc`, data:html});
+      toast('Đã tải đề thành công!');
+    }catch(e){
+      if(e.code==='declined') return;
+      toast('Lỗi: '+e.message);
+    }
+  }
+
+  async function exportPDF(code, codeIdx){
+    if(!downloadsNS){toast('Chức năng tải xuống không khả dụng');return;}
+    // Generate PDF using canvas approach - simple HTML to blob
+    const html=buildExamHTML(code,true);
+    const blob=new Blob([`<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:serif;font-size:12pt;margin:20px;color:#000;background:#fff}@media print{body{margin:0}}</style></head><body>${html}</body></html>`],{type:'text/html'});
+    try{
+      await downloadsNS.save({filename:`De_KHTN${currentGrade}_Ma${code.num}.html`, data:blob});
+      toast('Đã tải đề dạng HTML (mở và in PDF)!');
+    }catch(e){
+      if(e.code==='declined') return;
+      toast('Lỗi: '+e.message);
+    }
+  }
+
+  async function exportAllWord(){
+    if(!downloadsNS){toast('Chức năng tải xuống không khả dụng');return;}
+    let allHtml=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:'Times New Roman',serif;font-size:12pt}</style></head><body>`;
+    examCodes.forEach((code,i)=>{
+      if(i>0) allHtml+=`<div style="page-break-before:always"></div>`;
+      allHtml+=buildExamHTML(code,true);
+    });
+    allHtml+=`</body></html>`;
+    try{
+      await downloadsNS.save({filename:`De_KHTN${currentGrade}_${examCodes.length}made.doc`, data:allHtml});
+      toast('Đã tải tất cả mã đề!');
+    }catch(e){
+      if(e.code==='declined') return;
+      toast('Lỗi: '+e.message);
+    }
+  }
+
+  // ====== INIT RENDER ======
+  renderTabs();
+  renderView();
+})();
+</script>

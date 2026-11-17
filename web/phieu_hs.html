@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Phiếu dạy thêm KHTN 9 nâng cao</title>
+<style>
+@page { size: A4; margin: 13mm 13mm 14mm 13mm; }
+:root{
+  --ink:#1e293b; --muted:#64748b; --line:#cbd5e1;
+  --ly:#0b63c5; --ly-bg:#e8f1fc; --ly-soft:#cfe2f9;
+  --hoa:#c2410c; --hoa-bg:#fff1e8; --hoa-soft:#fcd9c3;
+  --nghe:#15803d; --nghe-bg:#eaf7ee;
+  --qt:#7c3aed; --qt-bg:#f3edff;
+  --ds:#0f766e; --ds-bg:#e6f6f4;
+  --tl:#b45309; --tl-bg:#fef6e4;
+}
+*{box-sizing:border-box}
+body{font-family:"Inter","DejaVu Sans",sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.45;margin:0}
+sub,sup{font-size:70%;line-height:0}
+b{font-weight:650}
+.page-break{break-before:page}
+.keep{break-inside:avoid}
+
+/* ===== HERO ===== */
+.hero{border-radius:14px;padding:14px 18px 12px;background:linear-gradient(120deg,#0b63c5 0%,#3b82f6 45%,#f97316 100%);color:#fff;position:relative;overflow:hidden}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.45);border-radius:20px;padding:2px 10px;font-size:8.5pt;font-weight:600;letter-spacing:.4px}
+.hero h1{margin:6px 0 2px;font-size:19pt;line-height:1.15;font-weight:800}
+.hero .en{font-size:9.5pt;opacity:.92;font-style:italic}
+.hero .lessons{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.hero .lessons span{background:#fff;color:var(--ink);border-radius:8px;padding:3px 9px;font-size:8.8pt;font-weight:600}
+.hero .lessons span i{font-style:normal;font-weight:800}
+.hero .lessons .l i{color:var(--ly)} .hero .lessons .h i{color:var(--hoa)}
+.hero .deco{position:absolute;right:-20px;top:-26px;font-size:92pt;opacity:.15}
+
+.student{display:grid;grid-template-columns:2.4fr 1fr 1.2fr;gap:10px;margin:10px 0 8px;font-size:9.8pt}
+.student div{border-bottom:1.5px dotted #94a3b8;padding:2px 2px 3px;color:var(--muted)}
+
+/* roadmap */
+.road{display:flex;align-items:stretch;gap:0;margin:6px 0 8px}
+.stop{flex:1;text-align:center;font-size:7.8pt;line-height:1.25;color:var(--muted);position:relative}
+.stop .dot{width:30px;height:30px;border-radius:50%;margin:0 auto 3px;display:flex;align-items:center;justify-content:center;font-size:13pt;color:#fff;font-weight:800;position:relative;z-index:2}
+.stop:not(:last-child)::after{content:"";position:absolute;top:15px;left:50%;width:100%;height:3px;background:repeating-linear-gradient(90deg,#cbd5e1 0 6px,transparent 6px 10px);z-index:1}
+.stop b{display:block;color:var(--ink);font-size:8.2pt}
+
+.data{background:#f8fafc;border:1px solid var(--line);border-left:4px solid #64748b;border-radius:8px;padding:6px 10px;font-size:8.7pt;color:#334155}
+.data b{color:var(--ink)}
+
+/* ===== SECTION HEADERS ===== */
+.sec{display:flex;align-items:center;gap:10px;margin:14px 0 8px;break-after:avoid}
+.sec .num{flex:none;width:34px;height:34px;border-radius:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15pt}
+.sec h2{margin:0;font-size:13.5pt;font-weight:800;line-height:1.15}
+.sec small{display:block;font-weight:500;color:var(--muted);font-size:8.6pt;margin-top:1px}
+.sec .stars{margin-left:auto;font-size:8pt;color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:3px 8px;white-space:nowrap}
+.sec .stars span{color:#f59e0b;font-size:10pt;letter-spacing:1px}
+.sub{font-weight:800;font-size:10.5pt;margin:10px 0 5px;padding:3px 10px;border-radius:6px;display:inline-block;break-after:avoid}
+.sub.ly{background:var(--ly-bg);color:var(--ly)} .sub.hoa{background:var(--hoa-bg);color:var(--hoa)}
+
+/* ===== TREE ===== */
+.tree{border-radius:14px;padding:12px 12px 10px;margin:6px 0 10px;break-inside:avoid}
+.tree.ly{background:var(--ly-bg)} .tree.hoa{background:var(--hoa-bg)}
+.root{display:block;width:max-content;margin:0 auto;color:#fff;font-weight:800;font-size:12pt;padding:7px 18px;border-radius:30px;box-shadow:0 3px 0 rgba(0,0,0,.12);position:relative}
+.tree.ly .root{background:var(--ly)} .tree.hoa .root{background:var(--hoa)}
+.root::after{content:"";position:absolute;left:50%;bottom:-12px;width:2.5px;height:12px;background:currentColor}
+.tree.ly .root::after{background:var(--ly)} .tree.hoa .root::after{background:var(--hoa)}
+.branches{display:grid;gap:8px;margin-top:12px;padding-top:12px;position:relative}
+.branches::before{content:"";position:absolute;top:0;height:2.5px;left:calc(var(--edge));right:calc(var(--edge))}
+.tree.ly .branches::before{background:var(--ly)} .tree.hoa .branches::before{background:var(--hoa)}
+.br{background:#fff;border-radius:10px;padding:0 0 6px;position:relative;border:1.5px solid}
+.br::before{content:"";position:absolute;top:-13.5px;left:50%;width:2.5px;height:12px}
+.tree.ly .br{border-color:var(--ly-soft)} .tree.hoa .br{border-color:var(--hoa-soft)}
+.tree.ly .br::before{background:var(--ly)} .tree.hoa .br::before{background:var(--hoa)}
+.br h4{margin:0 0 5px;padding:5px 8px;border-radius:8px 8px 0 0;font-size:9.4pt;text-align:center;font-weight:800;color:#fff}
+.leaf{font-size:8.7pt;line-height:1.38;margin:4px 7px 0 15px;position:relative}
+.leaf::before{content:"";position:absolute;left:-9px;top:6px;width:5px;height:5px;border-radius:50%}
+.tree.ly .leaf::before{background:var(--ly)} .tree.hoa .leaf::before{background:var(--hoa)}
+.f{display:inline-block;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:5px;padding:0 5px;font-weight:650;white-space:nowrap}
+.star{color:#d97706;font-weight:800}
+
+/* refraction figure + reactivity strip */
+.duo{display:grid;grid-template-columns:1fr 1.15fr;gap:10px;align-items:stretch;margin:4px 0 6px;break-inside:avoid}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px}
+.card h5{margin:0 0 4px;font-size:9.5pt;font-weight:800}
+.series{display:flex;gap:3px;margin:6px 0 2px}
+.series div{flex:1;text-align:center;font-weight:800;font-size:9.5pt;padding:5px 0;border-radius:6px;color:#fff}
+.zones{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font-size:7.6pt;text-align:center;line-height:1.2}
+.zones div{border-radius:5px;padding:3px 2px;font-weight:650}
+.legend-note{font-size:8pt;color:var(--muted);margin-top:4px}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0}
+.chip{border-radius:20px;padding:2px 9px;font-size:8.3pt;border:1px solid}
+.chip.ly{background:var(--ly-bg);border-color:var(--ly-soft)} .chip.hoa{background:var(--hoa-bg);border-color:var(--hoa-soft)}
+.chip i{color:var(--muted);font-style:italic}
+
+/* ===== QUESTIONS ===== */
+.q{margin:0 0 7px;break-inside:avoid}
+.q .qh{display:flex;gap:6px}
+.q .qn{flex:none;font-weight:800;min-width:46px}
+.q.ly .qn{color:var(--ly)} .q.hoa .qn{color:var(--hoa)} .q.ng .qn{color:var(--nghe)} .q.qt .qn{color:var(--qt)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:1px 14px;margin:2px 0 0 52px}
+.opts.four{grid-template-columns:repeat(4,1fr)}
+.opts.one{grid-template-columns:1fr}
+.opts span b{display:inline-block;width:18px}
+.items{margin:2px 0 0 52px}
+.items div{margin:1px 0}
+.lvl{display:inline-block;font-size:7.3pt;font-weight:700;border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px;color:#fff}
+.lvl.vd{background:#0ea5e9} .lvl.vdc{background:#e11d48}
+
+/* answer sheets */
+.sheet{border:1.5px dashed #94a3b8;border-radius:10px;padding:7px 10px;margin:6px 0 4px;background:#fcfdff;break-inside:avoid}
+.sheet h6{margin:0 0 5px;font-size:9pt;color:var(--muted);font-weight:700;letter-spacing:.3px}
+.bub{display:grid;grid-template-columns:repeat(6,1fr);gap:5px 8px;font-size:8.6pt}
+.bub div{white-space:nowrap}
+.bub b{display:inline-block;width:20px}
+.o{display:inline-block;width:14px;height:14px;border:1.3px solid #64748b;border-radius:50%;text-align:center;line-height:12px;font-size:7pt;margin-right:1px;color:#64748b}
+table.grid{border-collapse:collapse;width:100%;font-size:8.8pt}
+table.grid td,table.grid th{border:1px solid var(--line);padding:3px 6px;text-align:center}
+table.grid th{background:#f1f5f9;font-weight:700}
+table.grid td.blank{height:22px}
+
+.ds-q{border-left:3px solid;padding-left:9px}
+.ds-q.ly{border-color:var(--ly-soft)} .ds-q.hoa{border-color:var(--hoa-soft)}
+.ds-items div{display:flex;gap:6px;margin:1px 0}
+.ds-items div span:first-child{flex:1}
+.box2{display:inline-flex;gap:3px;flex:none}
+.box2 i{font-style:normal;display:inline-block;width:18px;height:16px;border:1.2px solid #94a3b8;border-radius:3px;font-size:7pt;text-align:center;line-height:14px;color:#94a3b8}
+
+.note{font-size:8.8pt;color:var(--muted);font-style:italic;margin:0 0 6px}
+
+/* feature boxes */
+.feature{border-radius:14px;padding:10px 12px;margin:8px 0;break-inside:avoid}
+.feature.ng{background:var(--nghe-bg);border:1.5px solid #bbe5c8}
+.feature.qt{background:var(--qt-bg);border:1.5px solid #ddd0fb}
+.careers{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.career{background:#fff;border-radius:10px;padding:6px 8px;font-size:8.6pt;border:1px solid #cdebd6}
+.career b{display:block;color:var(--nghe);font-size:9pt}
+.think{margin-top:7px;font-size:8.8pt;background:#fff;border-radius:8px;padding:5px 9px;border:1px dashed #86c99b}
+.lines{margin:4px 0 0 52px}
+.lines div{border-bottom:1px dotted #94a3b8;height:19px}
+
+.fig{float:right;margin:0 0 4px 10px}
+.foot{margin-top:12px;text-align:center;font-size:9pt;color:var(--muted)}
+.foot b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="deco">🔬</div>
+  <span class="tag">KHOA HỌC TỰ NHIÊN 9 · PHIẾU DẠY THÊM NÂNG CAO</span>
+  <h1>Ánh sáng đổi hướng &amp; Kim loại từ quặng đến hợp kim</h1>
+  <div class="en">Refraction of Light · Extracting Metals &amp; Alloys · Metals vs Non-metals</div>
+  <div class="lessons">
+    <span class="l"><i>Vật lí</i> · Bài 5. Khúc xạ ánh sáng</span>
+    <span class="h"><i>Hóa học</i> · Bài 20. Tách kim loại và việc sử dụng hợp kim</span>
+    <span class="h"><i>Hóa học</i> · Bài 21. Sự khác nhau cơ bản giữa phi kim và kim loại</span>
+  </div>
+</div>
+
+<div class="student">
+  <div>Họ và tên:</div><div>Lớp: 9</div><div>Ngày: &nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;/</div>
+</div>
+
+<div class="road">
+  <div class="stop"><div class="dot" style="background:#475569">🌳</div><b>Trạm 1</b>Sơ đồ kiến thức</div>
+  <div class="stop"><div class="dot" style="background:#2563eb">🎯</div><b>Trạm 2</b>Trắc nghiệm</div>
+  <div class="stop"><div class="dot" style="background:var(--ds)">⚖️</div><b>Trạm 3</b>Đúng hay Sai?</div>
+  <div class="stop"><div class="dot" style="background:var(--tl)">🔢</div><b>Trạm 4</b>Trả lời ngắn</div>
+  <div class="stop"><div class="dot" style="background:#e11d48">🧠</div><b>Trạm 5</b>Vận dụng cao</div>
+  <div class="stop"><div class="dot" style="background:var(--nghe)">🌏</div><b>Trạm 6</b>Khoa học quanh ta</div>
+  <div class="stop"><div class="dot" style="background:var(--qt)">🏆</div><b>Trạm 7</b>Thử thách quốc tế</div>
+</div>
+
+<div class="data"><b>🧰 Hộp dữ kiện dùng chung:</b> c = 3,0·10<sup>8</sup> m/s; chiết suất không khí ≈ 1; n<sub>nước</sub> = 4/3. Khí đo ở điều kiện chuẩn (25 °C; 1 bar): V<sub>m</sub> = 24,79 L/mol. Nguyên tử khối: H = 1; C = 12; N = 14; O = 16; Mg = 24; Al = 27; S = 32; Cl = 35,5; Ca = 40; Fe = 56; Cu = 64; Zn = 65; Ag = 108. Được dùng máy tính cầm tay.</div>
+
+<!-- ================= TRẠM 1 ================= -->
+<div class="sec"><div class="num" style="background:#475569">🌳</div><h2>Trạm 1 · Sơ đồ kiến thức<small>Đọc theo nhánh: từ gốc → nhánh → lá. Ô có dấu <span class="star">★</span> là kiến thức mở rộng nâng cao.</small></h2></div>
+
+<!-- Tree Physics -->
+<div class="tree ly">
+  <span class="root">💡 KHÚC XẠ ÁNH SÁNG</span>
+  <div class="branches" style="grid-template-columns:repeat(4,1fr);--edge:12.5%">
+    <div class="br"><h4 style="background:#0b63c5">① Hiện tượng</h4>
+      <div class="leaf">Tia sáng truyền <b>xiên</b> qua mặt phân cách hai môi trường trong suốt thì bị <b>gãy khúc</b>.</div>
+      <div class="leaf">Tia tới, tia khúc xạ, pháp tuyến <b>cùng một mặt phẳng</b>.</div>
+      <div class="leaf">Tia tới vuông góc mặt phân cách (i = 0) → truyền <b>thẳng</b>.</div>
+      <div class="leaf">Nguyên nhân: tốc độ ánh sáng <b>thay đổi</b> khi đổi môi trường.</div>
+    </div>
+    <div class="br"><h4 style="background:#1d74d6">② Định luật &amp; Chiết suất</h4>
+      <div class="leaf"><span class="f">n<sub>1</sub>sin i = n<sub>2</sub>sin r</span></div>
+      <div class="leaf"><span class="f">n = c / v</span> &nbsp;(n ≥ 1; chân không n = 1)</div>
+      <div class="leaf"><span class="f">n<sub>2</sub>/n<sub>1</sub> = v<sub>1</sub>/v<sub>2</sub></span></div>
+      <div class="leaf">n càng lớn → ánh sáng càng <b>chậm</b>.</div>
+      <div class="leaf">i, r luôn đo với <b>pháp tuyến</b>.</div>
+    </div>
+    <div class="br"><h4 style="background:#2f86e6">③ Hướng lệch</h4>
+      <div class="leaf">Sang môi trường n <b>lớn hơn</b>: r &lt; i → lệch <b>về gần</b> pháp tuyến.</div>
+      <div class="leaf">Sang môi trường n <b>nhỏ hơn</b>: r &gt; i → lệch <b>xa</b> pháp tuyến.</div>
+      <div class="leaf">i tăng → r tăng, nhưng <b>không</b> tỉ lệ thuận.</div>
+    </div>
+    <div class="br"><h4 style="background:#4b97ea">④ Mở rộng <span style="color:#fde68a">★</span></h4>
+      <div class="leaf">Góc lệch giữa tia khúc xạ và phương tia tới: <span class="f">D = |i − r|</span></div>
+      <div class="leaf">Nhiều lớp song song: <span class="f">n<sub>1</sub>sin i<sub>1</sub> = n<sub>2</sub>sin r<sub>2</sub> = …</span></div>
+      <div class="leaf">Bản mặt song song: tia ló <b>// tia tới</b>, chỉ dịch ngang.</div>
+      <div class="leaf">Độ sâu biểu kiến (nhìn gần vuông góc): <span class="f">h′ ≈ h / n</span></div>
+      <div class="leaf">Đường truyền ánh sáng có tính <b>thuận nghịch</b>.</div>
+    </div>
+  </div>
+</div>
+
+<div class="duo">
+  <div class="card">
+    <h5 style="color:var(--ly)">🔦 Nhìn hình – nhớ định luật</h5>
+    <svg viewBox="0 0 300 180" width="100%" height="160" font-family="Inter" font-size="11">
+      <rect x="0" y="90" width="300" height="90" fill="#cfe7fb"/>
+      <rect x="0" y="0" width="300" height="90" fill="#fbfdff"/>
+      <line x1="0" y1="90" x2="300" y2="90" stroke="#0b63c5" stroke-width="2"/>
+      <line x1="150" y1="8" x2="150" y2="172" stroke="#64748b" stroke-dasharray="5 4"/>
+      <text x="155" y="18" fill="#64748b" font-size="10">pháp tuyến</text>
+      <line x1="80" y1="20" x2="150" y2="90" stroke="#f59e0b" stroke-width="3"/>
+      <polygon points="118,58 108,54 113,49" fill="#f59e0b"/>
+      <line x1="150" y1="90" x2="192" y2="168" stroke="#e11d48" stroke-width="3"/>
+      <polygon points="176,138 180,148 170,146" fill="#e11d48" transform="rotate(-8 176 142)"/>
+      <path d="M150,50 A40,40 0 0 0 122,62" fill="none" stroke="#f59e0b" stroke-width="1.6"/>
+      <text x="128" y="44" fill="#b45309" font-weight="700">i</text>
+      <path d="M150,130 A40,40 0 0 0 169,125" fill="none" stroke="#e11d48" stroke-width="1.6"/>
+      <text x="157" y="146" fill="#be123c" font-weight="700">r</text>
+      <text x="8" y="80" fill="#0f172a" font-weight="700">Không khí (n₁ = 1)</text>
+      <text x="8" y="112" fill="#0f172a" font-weight="700">Nước (n₂ = 4/3)</text>
+      <text x="40" y="18" fill="#b45309">tia tới</text>
+      <text x="198" y="160" fill="#be123c">tia khúc xạ</text>
+      <text x="205" y="112" fill="#0b63c5" font-size="10.5">n₂ &gt; n₁ ⇒ r &lt; i</text>
+    </svg>
+  </div>
+  <div class="card">
+    <h5 style="color:var(--hoa)">⚗️ Dãy hoạt động hóa học &amp; cách tách kim loại</h5>
+    <div style="font-size:8pt;color:var(--muted)">Hoạt động mạnh ⟵ ⟶ hoạt động yếu</div>
+    <div class="series">
+      <div style="background:#9a3412">K</div><div style="background:#9a3412">Na</div><div style="background:#9a3412">Ca</div><div style="background:#9a3412">Mg</div><div style="background:#9a3412">Al</div>
+      <div style="background:#ea580c">Zn</div><div style="background:#ea580c">Fe</div><div style="background:#ea580c">Pb</div>
+      <div style="background:#94a3b8">(H)</div>
+      <div style="background:#f59e0b">Cu</div><div style="background:#f59e0b">Ag</div><div style="background:#f59e0b">Au</div>
+    </div>
+    <div class="zones">
+      <div style="grid-column:1/6;background:#fde4d4;color:#9a3412">⚡ Điện phân nóng chảy</div>
+      <div style="grid-column:6/13;background:#ffedd5;color:#c2410c">🔥 Nhiệt luyện (khử oxide bằng C, CO, H<sub>2</sub>, Al…)</div>
+      <div style="grid-column:10/13;background:#fef3c7;color:#92400e">💧 Thủy luyện</div>
+    </div>
+    <div class="legend-note">Kim loại đứng trước (trừ K, Na, Ca…) đẩy được kim loại đứng sau ra khỏi dung dịch muối. Kim loại đứng trước H đẩy được H khỏi dung dịch acid (HCl, H<sub>2</sub>SO<sub>4</sub> loãng).</div>
+  </div>
+</div>
+
+<!-- Tree Chemistry -->
+<div class="tree hoa">
+  <span class="root">⚗️ KIM LOẠI: TÁCH – HỢP KIM – SO SÁNH VỚI PHI KIM</span>
+  <div class="branches" style="grid-template-columns:repeat(4,1fr);--edge:12.5%">
+    <div class="br"><h4 style="background:#c2410c">① Tách kim loại</h4>
+      <div class="leaf"><b>Điện phân nóng chảy</b> (K → Al): 2Al<sub>2</sub>O<sub>3</sub> → 4Al + 3O<sub>2</sub>; NaCl nóng chảy → Na.</div>
+      <div class="leaf"><b>Nhiệt luyện</b>: Fe<sub>2</sub>O<sub>3</sub> + 3CO → 2Fe + 3CO<sub>2</sub> (t°).</div>
+      <div class="leaf"><b>Thủy luyện</b>: Fe + CuSO<sub>4</sub> → FeSO<sub>4</sub> + Cu.</div>
+    </div>
+    <div class="br"><h4 style="background:#d9541a">② Hợp kim</h4>
+      <div class="leaf"><b>Gang</b>: Fe + C (&gt; 2%) · <b>Thép</b>: C (&lt; 2%).</div>
+      <div class="leaf"><b>Inox</b>: Fe – Cr – Ni → chống gỉ.</div>
+      <div class="leaf"><b>Dural</b>: Al – Cu – Mg – Mn → nhẹ, bền (máy bay).</div>
+      <div class="leaf"><b>Đồng thau</b>: Cu – Zn.</div>
+      <div class="leaf">Mục đích: cứng hơn, bền hơn, nhẹ hơn, chống ăn mòn.</div>
+    </div>
+    <div class="br"><h4 style="background:#e8692b">③ Kim loại vs Phi kim</h4>
+      <div class="leaf"><b>Kim loại</b>: dẫn điện, dẫn nhiệt, ánh kim, dẻo; O<sub>2</sub> → thường oxide base.</div>
+      <div class="leaf"><b>Phi kim</b>: dẫn điện kém, giòn; rắn/lỏng/khí; O<sub>2</sub> → oxide acid hoặc trung tính.</div>
+      <div class="leaf"><b>Ngoại lệ</b>: graphite dẫn điện; Hg là kim loại lỏng; Br<sub>2</sub> là phi kim lỏng; Si là chất bán dẫn.</div>
+    </div>
+    <div class="br"><h4 style="background:#f07f3c">④ Công cụ giải toán <span style="color:#fde68a">★</span></h4>
+      <div class="leaf"><b>Bảo toàn O</b> khi khử oxide: n<sub>O (oxide)</sub> = n<sub>CO₂</sub> = n<sub>H₂O</sub></div>
+      <div class="leaf"><span class="f">m<sub>KL</sub> = m<sub>oxide</sub> − m<sub>O</sub></span></div>
+      <div class="leaf"><b>Tăng – giảm khối lượng</b> thanh kim loại: Δm = m<sub>bám vào</sub> − m<sub>tan ra</sub></div>
+      <div class="leaf"><span class="f">m<sub>thực tế</sub> = m<sub>lí thuyết</sub> × H</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card keep" style="margin-top:4px">
+  <h5>🗣️ Từ khóa song ngữ – Bilingual Keywords</h5>
+  <div class="chips">
+    <span class="chip ly">Khúc xạ ánh sáng · <i>refraction of light</i></span>
+    <span class="chip ly">Chiết suất · <i>refractive index</i></span>
+    <span class="chip ly">Pháp tuyến · <i>normal</i></span>
+    <span class="chip ly">Góc tới / góc khúc xạ · <i>angle of incidence / refraction</i></span>
+    <span class="chip ly">Độ sâu biểu kiến · <i>apparent depth</i></span>
+    <span class="chip ly">Bản mặt song song · <i>parallel-sided block</i></span>
+    <span class="chip hoa">Điện phân nóng chảy · <i>molten-salt electrolysis</i></span>
+    <span class="chip hoa">Nhiệt luyện · <i>pyrometallurgy</i></span>
+    <span class="chip hoa">Thủy luyện · <i>hydrometallurgy</i></span>
+    <span class="chip hoa">Chất khử · <i>reducing agent</i></span>
+    <span class="chip hoa">Hợp kim · <i>alloy</i></span>
+    <span class="chip hoa">Thép không gỉ · <i>stainless steel</i></span>
+    <span class="chip hoa">Chất bán dẫn · <i>semiconductor</i></span>
+  </div>
+</div>
+
+<!-- ================= TRẠM 2 ================= -->
+<div class="sec page-break"><div class="num" style="background:#2563eb">🎯</div><h2>Trạm 2 · Trắc nghiệm nhiều lựa chọn<small>Chọn một đáp án đúng, tô vào phiếu trả lời cuối trạm.</small></h2><div class="stars">Tự đánh giá: <span>☆☆☆</span></div></div>
+
+<div class="sub ly">A. Vật lí – Khúc xạ ánh sáng</div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 1.</span><span>Tốc độ ánh sáng trong thủy tinh là 2,0·10<sup>8</sup> m/s, trong nước là 2,25·10<sup>8</sup> m/s. Chiết suất tỉ đối của thủy tinh đối với nước là</span></div>
+<div class="opts four"><span><b>A.</b>0,889.</span><span><b>B.</b>1,125.</span><span><b>C.</b>1,50.</span><span><b>D.</b>1,33.</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 2.</span><span>Chiếu tia sáng từ không khí vào một khối chất trong suốt với góc tới 60°. Tia khúc xạ lệch so với phương tia tới một góc 25°. Chiết suất của khối chất gần nhất với</span></div>
+<div class="opts four"><span><b>A.</b>1,51.</span><span><b>B.</b>1,73.</span><span><b>C.</b>1,41.</span><span><b>D.</b>1,33.</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 3.</span><span>Một người nhìn gần vuông góc xuống bể nước (n = 4/3) thấy đáy bể dường như cách mặt nước 0,75 m. Độ sâu thật của bể là</span></div>
+<div class="opts four"><span><b>A.</b>0,56 m.</span><span><b>B.</b>0,75 m.</span><span><b>C.</b>1,0 m.</span><span><b>D.</b>1,33 m.</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 4.</span><span>Tia sáng đi từ môi trường (1) có n<sub>1</sub> = 1,5 sang môi trường (2) có n<sub>2</sub> = 1,2 với góc tới 30°. Góc khúc xạ gần nhất với</span></div>
+<div class="opts four"><span><b>A.</b>23,6°.</span><span><b>B.</b>38,7°.</span><span><b>C.</b>30,0°.</span><span><b>D.</b>51,3°.</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 5.</span><span>Thời gian ánh sáng truyền vuông góc qua một tấm kính dày 3 mm, chiết suất 1,5 là</span></div>
+<div class="opts four"><span><b>A.</b>1,0·10<sup>−11</sup> s.</span><span><b>B.</b>1,5·10<sup>−11</sup> s.</span><span><b>C.</b>2,0·10<sup>−11</sup> s.</span><span><b>D.</b>4,5·10<sup>−11</sup> s.</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 6.</span><span>Chiếu một tia sáng xiên góc vào một tấm thủy tinh có hai mặt song song đặt trong không khí. Tia ló ra khỏi tấm thủy tinh</span></div>
+<div class="opts"><span><b>A.</b>trùng với đường kéo dài của tia tới.</span><span><b>B.</b>song song với tia tới nhưng bị dịch ngang.</span><span><b>C.</b>vuông góc với tia tới.</span><span><b>D.</b>luôn lệch về gần pháp tuyến hơn tia tới.</span></div></div>
+
+<div class="sub hoa">B. Hóa học – Tách kim loại, hợp kim, kim loại và phi kim</div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 7.</span><span>Dùng CO dư khử hoàn toàn 23,2 gam Fe<sub>3</sub>O<sub>4</sub> ở nhiệt độ cao. Khối lượng Fe thu được là</span></div>
+<div class="opts four"><span><b>A.</b>16,8 g.</span><span><b>B.</b>11,2 g.</span><span><b>C.</b>22,4 g.</span><span><b>D.</b>5,6 g.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 8.</span><span>Dẫn CO dư qua 24 gam hỗn hợp CuO và Fe<sub>2</sub>O<sub>3</sub> nung nóng đến phản ứng hoàn toàn. Toàn bộ khí sinh ra hấp thụ vào nước vôi trong dư thu được 40 gam kết tủa. Khối lượng kim loại thu được là</span></div>
+<div class="opts four"><span><b>A.</b>17,6 g.</span><span><b>B.</b>16,0 g.</span><span><b>C.</b>20,8 g.</span><span><b>D.</b>12,8 g.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 9.</span><span>Trong công nghiệp, kim loại nào sau đây được sản xuất chủ yếu bằng phương pháp điện phân nóng chảy oxide của nó?</span></div>
+<div class="opts four"><span><b>A.</b>Fe.</span><span><b>B.</b>Cu.</span><span><b>C.</b>Al.</span><span><b>D.</b>Ag.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 10.</span><span>Hợp kim duralumin (dural) – vật liệu nhẹ và bền dùng trong chế tạo máy bay – có thành phần chính là</span></div>
+<div class="opts four"><span><b>A.</b>Fe.</span><span><b>B.</b>Al.</span><span><b>C.</b>Cu.</span><span><b>D.</b>Ti.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 11.</span><span>Thép không gỉ (inox) ngoài Fe và C còn chứa chủ yếu các nguyên tố</span></div>
+<div class="opts four"><span><b>A.</b>Cr, Ni.</span><span><b>B.</b>Al, Mg.</span><span><b>C.</b>Pb, Sn.</span><span><b>D.</b>Zn, Cu.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 12.</span><span>Đốt cháy hoàn toàn 2,4 gam kim loại M (hóa trị II) trong oxygen dư thu được 4,0 gam oxide. Kim loại M là</span></div>
+<div class="opts four"><span><b>A.</b>Zn.</span><span><b>B.</b>Ca.</span><span><b>C.</b>Mg.</span><span><b>D.</b>Cu.</span></div></div>
+
+<div class="sheet"><h6>✏️ PHIẾU TRẢ LỜI TRẠM 2 – tô kín đáp án em chọn</h6>
+<div class="bub">
+  <div><b>1</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>2</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>3</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>4</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>5</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>6</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>7</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>8</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>9</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>10</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>11</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+  <div><b>12</b><span class="o">A</span><span class="o">B</span><span class="o">C</span><span class="o">D</span></div>
+</div></div>
+
+<!-- ================= TRẠM 3 ================= -->
+<div class="sec"><div class="num" style="background:var(--ds)">⚖️</div><h2>Trạm 3 · Đúng hay Sai?<small>Đánh dấu ✓ vào ô Đ (đúng) hoặc S (sai) cho từng ý.</small></h2><div class="stars">Tự đánh giá: <span>☆☆☆</span></div></div>
+
+<div class="q ly ds-q"><div class="qh"><span class="qn">Câu 1.</span><span>Chiếu tia sáng từ không khí vào thủy tinh có chiết suất 1,5 với góc tới 45°.</span></div>
+<div class="items ds-items">
+<div><span>a) Góc khúc xạ xấp xỉ 28,1°.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>b) Tốc độ ánh sáng trong thủy tinh là 2,0·10<sup>8</sup> m/s.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>c) Góc lệch giữa tia khúc xạ và phương tia tới khoảng 16,9°.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>d) Nếu tăng góc tới lên gần 90° thì góc khúc xạ cũng tăng tới gần 90°.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+</div></div>
+<div class="q ly ds-q"><div class="qh"><span class="qn">Câu 2.</span><span>Một người đứng trên bờ quan sát một con cá đang bơi dưới nước. 🐟</span></div>
+<div class="items ds-items">
+<div><span>a) Người thấy ảnh của con cá ở vị trí cao hơn (gần mặt nước hơn) vị trí thật.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>b) Con cá nhìn lên sẽ thấy người ở vị trí cao hơn vị trí thật.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>c) Muốn phóng xiên trúng cá, người phải nhắm thẳng vào ảnh của con cá.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>d) Nếu chiếu một tia laser nhắm đúng vào ảnh của con cá thì tia laser có thể chiếu trúng con cá.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+</div></div>
+<div class="q hoa ds-q"><div class="qh"><span class="qn">Câu 3.</span><span>Về quá trình luyện gang và luyện thép:</span></div>
+<div class="items ds-items">
+<div><span>a) Trong lò cao, chất khử chủ yếu khử oxide sắt là CO được tạo ra từ than cốc.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>b) Đá vôi được đưa vào lò cao để tạo xỉ, loại bỏ tạp chất như SiO<sub>2</sub>.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>c) Gang có hàm lượng carbon nhỏ hơn thép.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>d) Luyện thép từ gang là quá trình oxi hóa để giảm hàm lượng carbon và các tạp chất.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+</div></div>
+<div class="q hoa ds-q"><div class="qh"><span class="qn">Câu 4.</span><span>Cho các đơn chất: graphite, Hg, Br<sub>2</sub>, S, Al, Cu.</span></div>
+<div class="items ds-items">
+<div><span>a) Có 2 đơn chất ở thể lỏng ở điều kiện thường.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>b) Có 3 đơn chất phi kim.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>c) Tất cả các đơn chất phi kim trong dãy đều không dẫn điện.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+<div><span>d) Al và Cu được dùng làm dây dẫn điện vì dẫn điện tốt và dễ kéo sợi.</span><span class="box2"><i>Đ</i><i>S</i></span></div>
+</div></div>
+
+<!-- ================= TRẠM 4 ================= -->
+<div class="sec"><div class="num" style="background:var(--tl)">🔢</div><h2>Trạm 4 · Trả lời ngắn<small>Chỉ ghi kết quả cuối cùng vào bảng, làm tròn theo yêu cầu.</small></h2><div class="stars">Tự đánh giá: <span>☆☆☆</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 1.</span><span>Tia sáng đi từ nước (n = 4/3) ra không khí, góc khúc xạ bằng 60°. Tính góc tới (độ, làm tròn đến hàng phần mười).</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 2.</span><span>Tốc độ ánh sáng trong kim cương là 1,24·10<sup>8</sup> m/s. Tính chiết suất của kim cương (làm tròn đến hai chữ số thập phân). 💎</span></div></div>
+<div class="q ly"><div class="qh"><span class="qn">Câu 3.</span><span>Chiếu tia sáng từ không khí vào một chất lỏng với góc tới 50° thì đo được góc khúc xạ 35°. Tính chiết suất của chất lỏng (làm tròn đến hai chữ số thập phân).</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 4.</span><span>Điện phân nóng chảy 102 kg Al<sub>2</sub>O<sub>3</sub> với hiệu suất 80%. Tính khối lượng Al thu được (kg).</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 5.</span><span>Cần bao nhiêu tấn quặng hematite chứa 80% Fe<sub>2</sub>O<sub>3</sub> để sản xuất 1 tấn gang chứa 95% Fe (coi hiệu suất 100%)? Làm tròn đến hai chữ số thập phân.</span></div></div>
+<div class="q hoa"><div class="qh"><span class="qn">Câu 6.</span><span>Ngâm một lá Zn trong dung dịch CuSO<sub>4</sub>; sau phản ứng khối lượng lá kim loại giảm 0,1 gam (toàn bộ Cu sinh ra bám vào lá). Tính khối lượng Cu đã bám vào lá (gam).</span></div></div>
+<div class="sheet"><h6>✏️ BẢNG KẾT QUẢ TRẠM 4</h6>
+<table class="grid"><tr><th style="width:14%">Câu</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+<tr><th>Kết quả</th><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td><td class="blank"></td></tr></table></div>
+
+<!-- ================= TRẠM 5 ================= -->
+<div class="sec page-break"><div class="num" style="background:#e11d48">🧠</div><h2>Trạm 5 · Tự luận – Vận dụng cao<small>Trình bày lời giải đầy đủ vào vở: tóm tắt → công thức → thay số → kết luận.</small></h2><div class="stars">Tự đánh giá: <span>☆☆☆</span></div></div>
+
+<div class="q ly"><div class="qh"><span class="qn">Câu 1.</span><span>Chiếu một tia sáng từ không khí tới mặt trên của một tấm thủy tinh hai mặt song song dày e = 6 cm, chiết suất n = 1,5, với góc tới i = 60°.</span></div>
+<div class="items"><div>a) Tính góc khúc xạ r ở mặt trên.</div><div>b) Chứng minh tia ló ra ở mặt dưới song song với tia tới.</div><div>c) Tính khoảng cách giữa đường kéo dài của tia tới và tia ló (độ dời ngang của tia sáng).</div></div></div>
+
+<div class="q ly"><div class="qh"><span class="qn">Câu 2.</span><span>
+<svg class="fig" viewBox="0 0 200 150" width="180" height="135" font-family="Inter" font-size="10">
+  <rect x="10" y="62" width="180" height="78" fill="#cfe7fb"/>
+  <line x1="10" y1="62" x2="190" y2="62" stroke="#0b63c5" stroke-width="2"/>
+  <line x1="10" y1="140" x2="190" y2="140" stroke="#475569" stroke-width="3"/>
+  <rect x="44" y="30" width="7" height="110" fill="#92400e"/>
+  <text x="138" y="12" font-size="16">☀️</text>
+  <line x1="128" y1="2" x2="52" y2="30" stroke="#f59e0b" stroke-width="1.6" stroke-dasharray="4 3" transform="rotate(0)"/>
+  <text x="56" y="28" fill="#92400e" font-size="9">cọc</text>
+  <text x="130" y="80" fill="#0b63c5" font-size="9">nước sâu 1,2 m</text>
+  <text x="14" y="58" fill="#334155" font-size="9">mặt nước</text>
+  <text x="120" y="152" fill="#334155" font-size="9">đáy bể</text>
+  <text x="2" y="24" fill="#334155" font-size="9">cọc dài 1,6 m</text>
+</svg>
+Một chiếc cọc dài 1,6 m được cắm thẳng đứng xuống đáy một bể nước, mực nước sâu 1,2 m. Ánh nắng chiếu tới mặt nước với góc tới i, biết sin i = 0,8 và cos i = 0,6. Lấy n<sub>nước</sub> = 4/3.</span></div>
+<div class="items"><div>a) Tính độ dài bóng của phần cọc nhô trên mặt nước, in trên mặt nước.</div><div>b) Tính sin r, cos r và độ dài bóng của cọc in trên đáy bể.</div><div>c) Nếu bể cạn nước thì bóng của cọc trên đáy dài bao nhiêu? Giải thích vì sao có nước thì bóng ngắn hơn.</div></div><div style="clear:both"></div></div>
+
+<div class="q hoa"><div class="qh"><span class="qn">Câu 3.</span><span>Hỗn hợp X gồm CuO và Fe<sub>2</sub>O<sub>3</sub> có khối lượng 32 gam. Khử hoàn toàn X bằng khí H<sub>2</sub> dư ở nhiệt độ cao, thu được 24 gam hỗn hợp kim loại.</span></div>
+<div class="items"><div>a) Viết các phương trình hóa học.</div><div>b) Tính phần trăm khối lượng mỗi oxide trong X.</div><div>c) Tính thể tích khí H<sub>2</sub> (đkc) đã tham gia phản ứng.</div></div></div>
+
+<div class="q hoa"><div class="qh"><span class="qn">Câu 4.</span><span>Đồng thau là hợp kim Cu – Zn. Cho 20 gam một mẫu đồng thau vào dung dịch HCl dư, thu được 2,479 L khí H<sub>2</sub> (đkc). 🎺</span></div>
+<div class="items"><div>a) Tính phần trăm khối lượng mỗi kim loại trong mẫu hợp kim.</div><div>b) Vì sao đồng thau được dùng làm chi tiết máy, van nước, nhạc cụ thay cho đồng nguyên chất?</div></div></div>
+
+<div class="q hoa"><div class="qh"><span class="qn">Câu 5.</span><span><b>(Thu hồi bạc bằng thủy luyện)</b> Ngâm một lá Cu nặng 10 gam vào 250 gam dung dịch AgNO<sub>3</sub> 6,8%. Sau khi AgNO<sub>3</sub> phản ứng hết, lấy lá kim loại ra, làm khô (toàn bộ Ag sinh ra bám vào lá).</span></div>
+<div class="items"><div>a) Tính khối lượng lá kim loại sau phản ứng.</div><div>b) Tính nồng độ phần trăm của dung dịch thu được.</div></div></div>
+
+<!-- ================= TRẠM 6 ================= -->
+<div class="sec"><div class="num" style="background:var(--nghe)">🌏</div><h2 style="color:var(--nghe)">Trạm 6 · Khoa học quanh ta &amp; Định hướng nghề nghiệp<small>Kiến thức trong sách đang được dùng ở đâu ngoài đời thực?</small></h2></div>
+
+<div class="feature ng">
+<div class="q ng"><div class="qh"><span class="qn">Câu 1.</span><span><b>♻️ "Mỏ đô thị" – thu hồi đồng từ rác thải điện tử.</b> Rác thải điện tử chứa nhiều kim loại có giá trị, nên việc thu hồi chúng được gọi là khai thác "mỏ đô thị" (urban mining). Giả sử một loại bản mạch điện tử thải chứa 15% Cu về khối lượng <i>(số liệu giả định)</i>. Người ta hòa tan để chuyển 90% lượng Cu vào dung dịch CuSO<sub>4</sub>, rồi dùng sắt vụn để thu hồi toàn bộ Cu trong dung dịch.</span></div>
+<div class="items"><div>a) Tính khối lượng Cu thu hồi được từ 1 tấn bản mạch.</div><div>b) Tính khối lượng sắt vụn tối thiểu cần dùng.</div><div>c) Phương pháp dùng sắt vụn thuộc phương pháp tách kim loại nào? Nêu hai lợi ích của việc thu hồi kim loại từ rác thải điện tử.</div></div></div>
+<div class="q ng" style="margin-bottom:0"><div class="qh"><span class="qn">Câu 2.</span><span><b>🍊 Khúc xạ kế – đo độ ngọt của nước ép.</b> Khúc xạ kế (refractometer) được dùng trong nông nghiệp, chế biến thực phẩm để đo độ ngọt của trái cây: dung dịch càng nhiều đường thì chiết suất càng lớn. Chiết suất của nước là 1,333; của dung dịch đường 10% là 1,348; của dung dịch đường 20% là 1,364. Chiếu tia sáng từ không khí vào một mẫu nước ép với góc tới 60° thì đo được góc khúc xạ 39,7°.</span></div>
+<div class="items"><div>a) Tính chiết suất của mẫu nước ép (làm tròn đến ba chữ số thập phân).</div><div>b) Tính tốc độ ánh sáng trong mẫu.</div><div>c) Coi chiết suất thay đổi đều theo nồng độ trong khoảng 10% – 20%, ước lượng nồng độ đường của mẫu.</div></div></div>
+</div>
+
+<div class="feature ng">
+<div style="font-weight:800;color:var(--nghe);margin-bottom:6px">🎯 Nghề nghiệp tương lai từ bài học hôm nay</div>
+<div class="careers">
+  <div class="career"><b>🔭 Kĩ sư quang học – quang điện tử</b>Thiết kế thấu kính, camera điện thoại, cảm biến, cáp quang, khúc xạ kế.</div>
+  <div class="career"><b>🏭 Kĩ sư luyện kim – vật liệu</b>Sản xuất thép, nhôm; phát triển hợp kim nhẹ, bền cho ô tô điện, máy bay, tàu cao tốc.</div>
+  <div class="career"><b>♻️ Kĩ sư môi trường – tái chế</b>Thu hồi kim loại từ rác thải điện tử, pin cũ; xây dựng kinh tế tuần hoàn.</div>
+  <div class="career"><b>💻 Kĩ sư bán dẫn</b>Chế tạo chip và pin mặt trời từ silicon – ngành đang được Việt Nam ưu tiên đào tạo nhân lực.</div>
+</div>
+<div class="think">💭 <b>Suy ngẫm:</b> Em hứng thú với nghề nào nhất? Nghề đó cần dùng những kiến thức nào trong phiếu này?
+<div class="lines" style="margin-left:0"><div></div><div></div></div></div>
+</div>
+
+<!-- ================= TRẠM 7 ================= -->
+<div class="sec"><div class="num" style="background:var(--qt)">🏆</div><h2 style="color:var(--qt)">Trạm 7 · Thử thách quốc tế<small>Bài tập theo định dạng đề Olympic Khoa học trẻ quốc tế (IJSO)</small></h2></div>
+<div class="feature qt">
+<div class="q qt"><div class="qh"><span class="qn">Bài 1.</span><span><b>🇬🇧 Science in English.</b> A ray of light in air strikes the flat surface of a liquid. The angle of incidence is 45° and the angle of refraction is 30°.</span></div>
+<div class="items"><div>(a) Calculate the refractive index of the liquid.</div><div>(b) Calculate the speed of light in the liquid. (c = 3.0 × 10<sup>8</sup> m/s)</div><div>(c) The liquid forms a thin flat layer on top of a flat glass block of refractive index 1.5. Find the angle of refraction of the ray inside the glass. Explain why the answer does not depend on the refractive index of the liquid.</div></div></div>
+<div class="q qt" style="margin-bottom:0"><div class="qh"><span class="qn">Bài 2.</span><span><b>🔥 Phản ứng nhiệt nhôm (Thermite reaction).</b> Hỗn hợp bột Al và Fe<sub>2</sub>O<sub>3</sub> khi được mồi cháy phản ứng tỏa nhiệt rất mạnh, tạo ra sắt nóng chảy – được dùng để hàn nối đường ray xe lửa:&nbsp; 2Al + Fe<sub>2</sub>O<sub>3</sub> → Al<sub>2</sub>O<sub>3</sub> + 2Fe (t°).</span></div>
+<div class="items"><div>(a) Tính tỉ lệ khối lượng Al : Fe<sub>2</sub>O<sub>3</sub> trong hỗn hợp vừa đủ phản ứng.</div><div>(b) Từ 1 kg hỗn hợp vừa đủ, thu được tối đa bao nhiêu gam Fe?</div><div>(c) Dựa vào dãy hoạt động hóa học, giải thích vì sao Al khử được Fe<sub>2</sub>O<sub>3</sub> nhưng Fe không khử được Al<sub>2</sub>O<sub>3</sub>. Phản ứng này thuộc phương pháp tách kim loại nào?</div></div></div>
+</div>
+
+<div class="foot">🌟 <b>Hoàn thành hành trình!</b> Tô sao tự đánh giá ở mỗi trạm và ghi lại câu em thấy khó nhất để hỏi cô: ……………………………</div>
+
+</body>
+</html>
